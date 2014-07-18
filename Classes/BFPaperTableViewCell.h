@@ -12,7 +12,7 @@
 static const CGFloat bfPaperTableViewCell_tapCircleDiameterMedium = 462.f;
 static const CGFloat bfPaperTableViewCell_tapCircleDiameterLarge = bfPaperTableViewCell_tapCircleDiameterMedium * 1.4f;
 static const CGFloat bfPaperTableViewCell_tapCircleDiameterSmall = bfPaperTableViewCell_tapCircleDiameterMedium / 2.f;
-
+static const CGFloat bfPaperTableViewCell_tapCircleDiameterDefault = -1.f;
 
 @interface BFPaperTableViewCell : UITableViewCell
 /** A flag to set YES to use Smart Color, or NO to use a custom color scheme. While Smart Color is recommended, customization is cool too. */

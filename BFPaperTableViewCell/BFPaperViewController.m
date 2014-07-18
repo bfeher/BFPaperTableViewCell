@@ -92,34 +92,6 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     // Configure the cell...
-    cell.textLabel.backgroundColor = [UIColor clearColor];
-
-    // Demo 2 clear cells:
-    if (indexPath.row == 0) {
-        cell.backgroundColor = [UIColor clearColor];
-        cell.textLabel.textColor = [self.colors objectAtIndex:indexPath.row];
-        cell.usesSmartColor = YES;
-        cell.textLabel.text = @"Clear, Smart Color";
-    }
-    else if (indexPath.row == 1) {
-        cell.backgroundColor = [UIColor clearColor];
-        cell.textLabel.textColor = [self.colors objectAtIndex:indexPath.row];
-        cell.usesSmartColor = NO;
-        cell.textLabel.text = @"Clear, !Smart Color";
-    }
-    // The rest of the first half should be white with colored text:
-    else if (indexPath.row < self.colors.count){
-        cell.backgroundColor = [UIColor whiteColor];
-        cell.textLabel.textColor = [self.colors objectAtIndex:indexPath.row];
-        cell.usesSmartColor = YES;
-    }
-    // After that, just color their background and give them white text:
-    else {
-        cell.backgroundColor = [self.colors objectAtIndex:indexPath.row % self.colors.count];
-        cell.textLabel.textColor = [UIColor whiteColor];
-        cell.usesSmartColor = YES;
-    }
-    
     
     // Even indexed cells will ripple from the center while odd ones will ripple from tap location:
     if (indexPath.row % 2 == 0) {
@@ -130,7 +102,48 @@
         cell.rippleFromTapLocation = YES;
         cell.textLabel.text = @"BFPaperTableViewCell";
     }
+
+    // Demo 2 clear cells:
+    if (indexPath.row == 0) {
+        cell.backgroundColor = [UIColor clearColor];
+        cell.textLabel.textColor = [self.colors objectAtIndex:indexPath.row];
+        cell.usesSmartColor = YES;
+        cell.textLabel.text = @"Clear, Smart Color";
+        cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterDefault;
+    }
+    else if (indexPath.row == 1) {
+        cell.backgroundColor = [UIColor clearColor];
+        cell.textLabel.textColor = [self.colors objectAtIndex:indexPath.row];
+        cell.usesSmartColor = NO;
+        cell.textLabel.text = @"Clear, !Smart Color";
+        cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterDefault;
+    }
+    // The rest of the first half should be white with colored text:
+    else if (indexPath.row < self.colors.count){
+        cell.backgroundColor = [UIColor whiteColor];
+        cell.textLabel.textColor = [self.colors objectAtIndex:indexPath.row];
+        cell.usesSmartColor = YES;
+        cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterDefault;
+    }
+    // Customize two cells between white bg cells and color bg cells
+    else if (indexPath.row <= self.colors.count + 1) {
+        cell.textLabel.text = @"Customized!";
+        cell.backgroundColor = [UIColor paperColorDeepPurple];
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterSmall;
+        cell.tapCircleColor = [[UIColor paperColorPink] colorWithAlphaComponent:0.7];
+        cell.backgroundFadeColor = [UIColor paperColorRedA100];
+    }
+    // After that, just color their background and give them white text:
+    else {
+        cell.backgroundColor = [self.colors objectAtIndex:indexPath.row % self.colors.count];
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.usesSmartColor = YES;
+        cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterDefault;
+    }
     
+    cell.textLabel.backgroundColor = [UIColor clearColor];  // THIS IS SUPER IMPORTANT!! SET THIS LAST RIGHT BEFORE RETURNING.
+
     return cell;
 }
 
