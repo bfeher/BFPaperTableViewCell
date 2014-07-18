@@ -38,8 +38,8 @@
 /* Begin PBXFileReference section */
 		76F5BA7DEE0E4B1591F3A7DE /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		AB931C51F2904B9DB9C8D5D4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		F42B5BA71978DD0000D6F4B5 /* BFPaperTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BFPaperTableViewCell.h; path = Classes/BFPaperTableViewCell.h; sourceTree = "<group>"; };
-		F42B5BA81978DD0000D6F4B5 /* BFPaperTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BFPaperTableViewCell.m; path = Classes/BFPaperTableViewCell.m; sourceTree = "<group>"; };
+		F42B5BA71978DD0000D6F4B5 /* BFPaperTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BFPaperTableViewCell.h; path = ../Classes/BFPaperTableViewCell.h; sourceTree = "<group>"; };
+		F42B5BA81978DD0000D6F4B5 /* BFPaperTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BFPaperTableViewCell.m; path = ../Classes/BFPaperTableViewCell.m; sourceTree = "<group>"; };
 		F48E73AA1977B45700982A46 /* BFPaperTableViewCell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BFPaperTableViewCell.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F48E73AD1977B45700982A46 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F48E73AF1977B45700982A46 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
