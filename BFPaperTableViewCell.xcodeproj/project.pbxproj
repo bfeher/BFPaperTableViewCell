@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C252AB3C7E6944848065E9E3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB931C51F2904B9DB9C8D5D4 /* libPods.a */; };
+		F42B5BA91978DD0000D6F4B5 /* BFPaperTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F42B5BA81978DD0000D6F4B5 /* BFPaperTableViewCell.m */; };
 		F48E73AE1977B45700982A46 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48E73AD1977B45700982A46 /* Foundation.framework */; };
 		F48E73B01977B45700982A46 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48E73AF1977B45700982A46 /* CoreGraphics.framework */; };
 		F48E73B21977B45700982A46 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48E73B11977B45700982A46 /* UIKit.framework */; };
@@ -22,7 +23,6 @@
 		F48E73CF1977B45700982A46 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48E73B11977B45700982A46 /* UIKit.framework */; };
 		F48E73D71977B45700982A46 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F48E73D51977B45700982A46 /* InfoPlist.strings */; };
 		F48E73D91977B45700982A46 /* BFPaperTableViewCellTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F48E73D81977B45700982A46 /* BFPaperTableViewCellTests.m */; };
-		F48E73E51977BB0600982A46 /* BFPaperTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F48E73E41977BB0600982A46 /* BFPaperTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +38,8 @@
 /* Begin PBXFileReference section */
 		76F5BA7DEE0E4B1591F3A7DE /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		AB931C51F2904B9DB9C8D5D4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F42B5BA71978DD0000D6F4B5 /* BFPaperTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BFPaperTableViewCell.h; path = Classes/BFPaperTableViewCell.h; sourceTree = "<group>"; };
+		F42B5BA81978DD0000D6F4B5 /* BFPaperTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BFPaperTableViewCell.m; path = Classes/BFPaperTableViewCell.m; sourceTree = "<group>"; };
 		F48E73AA1977B45700982A46 /* BFPaperTableViewCell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BFPaperTableViewCell.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F48E73AD1977B45700982A46 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F48E73AF1977B45700982A46 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -57,8 +59,6 @@
 		F48E73D41977B45700982A46 /* BFPaperTableViewCellTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BFPaperTableViewCellTests-Info.plist"; sourceTree = "<group>"; };
 		F48E73D61977B45700982A46 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F48E73D81977B45700982A46 /* BFPaperTableViewCellTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BFPaperTableViewCellTests.m; sourceTree = "<group>"; };
-		F48E73E31977BB0600982A46 /* BFPaperTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BFPaperTableViewCell.h; path = Classes/BFPaperTableViewCell.h; sourceTree = SOURCE_ROOT; };
-		F48E73E41977BB0600982A46 /* BFPaperTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BFPaperTableViewCell.m; path = Classes/BFPaperTableViewCell.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,8 +165,8 @@
 		F48E73E21977BAF000982A46 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				F48E73E31977BB0600982A46 /* BFPaperTableViewCell.h */,
-				F48E73E41977BB0600982A46 /* BFPaperTableViewCell.m */,
+				F42B5BA71978DD0000D6F4B5 /* BFPaperTableViewCell.h */,
+				F42B5BA81978DD0000D6F4B5 /* BFPaperTableViewCell.m */,
 			);
 			name = Classes;
 			path = BFPaperTableViewCell;
@@ -305,7 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F48E73E51977BB0600982A46 /* BFPaperTableViewCell.m in Sources */,
+				F42B5BA91978DD0000D6F4B5 /* BFPaperTableViewCell.m in Sources */,
 				F48E73C41977B45700982A46 /* BFPaperViewController.m in Sources */,
 				F48E73BA1977B45700982A46 /* main.m in Sources */,
 				F48E73BE1977B45700982A46 /* BFPaperAppDelegate.m in Sources */,
@@ -390,7 +390,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -422,7 +422,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
