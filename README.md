@@ -10,9 +10,9 @@ About
 ---------
 _BFPaperTableViewCell_ is a subclass of UITableViewCell that behaves much like the new paper table cells from Google's Material Design Labs.
 All animation are asynchronous and are performed on sublayers.
-_BFPaperTableViewCell_s work right away with pleasing default behaviors, however they can be easily customized! The tap-circle color, background fade color, and tap-circle diameter are all readily customizable via public properties.
+_BFPaperTableViewCells_ work right away with pleasing default behaviors, however they can be easily customized! The tap-circle color, background fade color, and tap-circle diameter are all readily customizable via public properties.
 
-By default, _BFPaperTableViewCell_s use "Smart Color" which will match the tap-circle and background fade colors to the color of the `textLabel`.
+By default, _BFPaperTableViewCells_ use "Smart Color" which will match the tap-circle and background fade colors to the color of the `textLabel`.
 You can turn off Smart Color by setting the property, `.usesSmartColor` to `NO`. If you disable Smart Color, a gray color will be used by default for both the tap-circle and the background color fade.
 You can set your own colors via: `.tapCircleColor` and `.backgroundFadeColor`. Note that setting these disables Smart Color.
 
@@ -46,23 +46,23 @@ If you use storyboards with prototype cells, be sure to change the prototype cel
 // Register BFPaperTableViewCell for our tableView in viewDidLoad:
 - (void)viewDidLoad
 {
-...
-[self.tableView registerClass:[BFPaperTableViewCell class] forCellReuseIdentifier:@"BFPaperCell"];  // NOTE: This is not required if we declared a prototype cell in our storyboard (which this example project does). This is here purely for information purposes.
-...
+  ...
+  [self.tableView registerClass:[BFPaperTableViewCell class] forCellReuseIdentifier:@"BFPaperCell"];  // NOTE: This is not required if we declared a prototype cell in our storyboard (which this example project does). This is here purely for information purposes.
+  ...
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-BFPaperTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BFPaperCell" forIndexPath:indexPath];
-if (!cell) {
-cell = [[BFPaperTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"BFPaperCell"];
-}
-cell.rippleFromTapLocation = NO; // Will always ripple from center if NO.
-cell.tapCircleColor = [[UIColor paperColorDeepPurple] colorWithAlphaComponent:0.3];
-cell.backgroundFadeColor = [UIColor paperColorBlue];
-cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterSmall;
-return cell;
+  BFPaperTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BFPaperCell" forIndexPath:indexPath];
+  if (!cell) {
+    cell = [[BFPaperTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"BFPaperCell"];
+  }
+  cell.rippleFromTapLocation = NO; // Will always ripple from center if NO.
+  cell.tapCircleColor = [[UIColor paperColorDeepPurple] colorWithAlphaComponent:0.3];
+  cell.backgroundFadeColor = [UIColor paperColorBlue];
+  cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterSmall;
+  return cell;
 }
 ```
 
@@ -84,4 +84,4 @@ License
 --------
 _BFPaperTableViewCell_ uses the MIT License:
 
-> Please see included [LICENSE file](link/LICENSE.md).
+> Please see included [LICENSE file](https://raw.githubusercontent.com/bfeher/BFPaperTableViewCell/master/LICENSE.md).
