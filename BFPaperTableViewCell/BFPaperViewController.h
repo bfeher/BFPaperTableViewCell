@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BFPaperViewController : UIViewController
+@interface BFPaperViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end

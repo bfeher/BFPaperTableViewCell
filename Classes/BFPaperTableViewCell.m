@@ -26,15 +26,15 @@
 static CGFloat const bfPaperCell_animationDurationConstant       = 0.2f;
 static CGFloat const bfPaperCell_tapCircleGrowthDurationConstant = bfPaperCell_animationDurationConstant * 2;
 // -the tap-circle's size:
-static CGFloat const bfPaperCell_tapCircleDiameterStartValue     = 5.f;    // for the mask
+static CGFloat const bfPaperCell_tapCircleDiameterStartValue     = 5.f; // for the mask
+static CGFloat const bfPaperCell_tapCircleAutoSizeConstant       = 1.75;
+static CGFloat const bfPaperCell_tapCircleGrowthBurst            = 40.f;
 // -the tap-circle's beauty:
-static CGFloat const bfPaperCell_tapFillConstant                 = 0.16f;  // or 0.12f if you like a bit darker
-static CGFloat const bfPaperCell_clearBGTapFillConstant          = 0.1f;  // or 0.1f if you like a bit darker
-static CGFloat const bfPaperCell_clearBGFadeConstant             = 0.12f;  // or 0.1f if you like a bit darker
+static CGFloat const bfPaperCell_tapFillConstant                 = 0.25f;
+static CGFloat const bfPaperCell_fadeConstant                    = 0.15f;
 
-#define BFPAPERCELL__DUMB_TAP_FILL_COLOR             [UIColor colorWithWhite:0.2 alpha:bfPaperCell_tapFillConstant]
-#define BFPAPERCELL__CLEAR_BG_DUMB_TAP_FILL_COLOR    [UIColor colorWithWhite:0.3 alpha:bfPaperCell_clearBGTapFillConstant]
-#define BFPAPERCELL__CLEAR_BG_DUMB_FADE_COLOR        [UIColor colorWithWhite:0.3 alpha:1]
+#define BFPAPERCELL__DUMB_TAP_FILL_COLOR    [UIColor colorWithWhite:0.3 alpha:bfPaperCell_tapFillConstant]
+#define BFPAPERCELL__DUMB_FADE_COLOR        [UIColor colorWithWhite:0.3 alpha:1]
 
 
 #pragma mark - Default Initializers
@@ -66,6 +66,8 @@ static CGFloat const bfPaperCell_clearBGFadeConstant             = 0.12f;  // or
     self.backgroundFadeColor = nil;
     self.tapCircleDiameter = -1.f;
     self.rippleFromTapLocation = YES;
+    
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     self.layer.masksToBounds = YES;
     self.clipsToBounds = YES;
@@ -100,35 +102,11 @@ static CGFloat const bfPaperCell_clearBGFadeConstant             = 0.12f;  // or
 /*- (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-    
-    if (self.beganSelection) {
-        return;
-    }
-    self.beganSelection = YES;
-    self.beganHighlight = NO;
-
-    // Configure the view for the selected state
-    NSLog(@"selecting now");
-    
-//    [self shrinkTapCircle];
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
 {
     [super setHighlighted:highlighted animated:animated];
-    
-    if (self.beganHighlight
-        ||
-        !self.haveTapped) {
-        return;
-    }
-    self.beganHighlight = YES;
-    self.beganSelection = NO;
-    
-    // Configure the view for the highlighted state
-    NSLog(@"highlighting now");
-    
-//    [self growTapCircle];
 }*/
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -202,11 +180,11 @@ static CGFloat const bfPaperCell_clearBGFadeConstant             = 0.12f;  // or
     
     // Set the fill color for the tap circle (self.animationLayer's fill color):
     if (!self.tapCircleColor) {
-        self.tapCircleColor = self.usesSmartColor ? [self.textLabel.textColor colorWithAlphaComponent:bfPaperCell_clearBGTapFillConstant] : BFPAPERCELL__CLEAR_BG_DUMB_TAP_FILL_COLOR;
+        self.tapCircleColor = self.usesSmartColor ? [self.textLabel.textColor colorWithAlphaComponent:bfPaperCell_tapFillConstant] : BFPAPERCELL__DUMB_TAP_FILL_COLOR;
     }
         
     if (!self.backgroundFadeColor) {
-        self.backgroundFadeColor = self.usesSmartColor ? self.textLabel.textColor : BFPAPERCELL__CLEAR_BG_DUMB_FADE_COLOR;
+        self.backgroundFadeColor = self.usesSmartColor ? self.textLabel.textColor : BFPAPERCELL__DUMB_FADE_COLOR;
     }
         
         // Setup background fade layer:
@@ -218,7 +196,7 @@ static CGFloat const bfPaperCell_clearBGFadeConstant             = 0.12f;  // or
     fadeBackgroundDarker.duration = bfPaperCell_animationDurationConstant;
     fadeBackgroundDarker.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     fadeBackgroundDarker.fromValue = [NSNumber numberWithFloat:0.f];
-    fadeBackgroundDarker.toValue = [NSNumber numberWithFloat:bfPaperCell_clearBGFadeConstant];
+    fadeBackgroundDarker.toValue = [NSNumber numberWithFloat:bfPaperCell_fadeConstant];
     fadeBackgroundDarker.fillMode = kCAFillModeForwards;
     fadeBackgroundDarker.removedOnCompletion = NO;
     [self.backgroundColorFadeLayer addAnimation:fadeBackgroundDarker forKey:@"animateOpacity"];
@@ -234,7 +212,7 @@ static CGFloat const bfPaperCell_clearBGFadeConstant             = 0.12f;  // or
     NSLog(@"self.center: (x%0.2f, y%0.2f)", self.center.x, self.center.y);
     UIBezierPath *startingTapCirclePath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(origin.x - (bfPaperCell_tapCircleDiameterStartValue / 2.f), origin.y - (bfPaperCell_tapCircleDiameterStartValue / 2.f), bfPaperCell_tapCircleDiameterStartValue, bfPaperCell_tapCircleDiameterStartValue) cornerRadius:bfPaperCell_tapCircleDiameterStartValue / 2.f];
     
-    CGFloat tapCircleDiameterEndValue = (self.tapCircleDiameter < 0) ? MAX(self.frame.size.width, self.frame.size.height) : self.tapCircleDiameter;
+    CGFloat tapCircleDiameterEndValue = (self.tapCircleDiameter < 0) ? MAX(self.frame.size.width * bfPaperCell_tapCircleAutoSizeConstant, self.frame.size.height * bfPaperCell_tapCircleAutoSizeConstant) : self.tapCircleDiameter;
     UIBezierPath *endTapCirclePath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(origin.x - (tapCircleDiameterEndValue/ 2.f), origin.y - (tapCircleDiameterEndValue/ 2.f), tapCircleDiameterEndValue, tapCircleDiameterEndValue) cornerRadius:tapCircleDiameterEndValue/ 2.f];
     
     // Animation Mask Layer:
@@ -288,7 +266,7 @@ static CGFloat const bfPaperCell_clearBGFadeConstant             = 0.12f;  // or
     CABasicAnimation *removeFadeBackgroundDarker = [CABasicAnimation animationWithKeyPath:@"opacity"];
     removeFadeBackgroundDarker.duration = bfPaperCell_animationDurationConstant;
     removeFadeBackgroundDarker.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-    removeFadeBackgroundDarker.fromValue = [NSNumber numberWithFloat:bfPaperCell_clearBGFadeConstant];
+    removeFadeBackgroundDarker.fromValue = [NSNumber numberWithFloat:bfPaperCell_fadeConstant];
     removeFadeBackgroundDarker.toValue = [NSNumber numberWithFloat:0.f];
     removeFadeBackgroundDarker.fillMode = kCAFillModeForwards;
     removeFadeBackgroundDarker.removedOnCompletion = NO;
@@ -302,13 +280,13 @@ static CGFloat const bfPaperCell_clearBGFadeConstant             = 0.12f;  // or
     NSLog(@"expanding a bit more");
     
     // Animation Mask Rects
-    CGFloat newTapCircleStartValue = (self.tapCircleDiameter < 0) ? MAX(self.frame.size.width, self.frame.size.height) : self.tapCircleDiameter;
+    CGFloat newTapCircleStartValue = (self.tapCircleDiameter < 0) ? MAX(self.frame.size.width * bfPaperCell_tapCircleAutoSizeConstant, self.frame.size.height * bfPaperCell_tapCircleAutoSizeConstant) : self.tapCircleDiameter;
     
     CGPoint origin = self.rippleFromTapLocation ? self.tapPoint : CGPointMake(self.bounds.size.width / 2, self.bounds.size.height / 2);
     UIBezierPath *startingTapCirclePath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(origin.x - (newTapCircleStartValue / 2.f), origin.y - (newTapCircleStartValue / 2.f), newTapCircleStartValue, newTapCircleStartValue) cornerRadius:newTapCircleStartValue / 2.f];
     
-    CGFloat tapCircleDiameterEndValue = (self.tapCircleDiameter < 0) ? MAX(self.frame.size.width, self.frame.size.height) : self.tapCircleDiameter;
-    tapCircleDiameterEndValue += 40.f;
+    CGFloat tapCircleDiameterEndValue = (self.tapCircleDiameter < 0) ? MAX(self.frame.size.width * bfPaperCell_tapCircleAutoSizeConstant, self.frame.size.height * bfPaperCell_tapCircleAutoSizeConstant) : self.tapCircleDiameter;
+    tapCircleDiameterEndValue += bfPaperCell_tapCircleGrowthBurst;
     UIBezierPath *endTapCirclePath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(origin.x - (tapCircleDiameterEndValue/ 2.f), origin.y - (tapCircleDiameterEndValue/ 2.f), tapCircleDiameterEndValue, tapCircleDiameterEndValue) cornerRadius:tapCircleDiameterEndValue/ 2.f];
     
     // Animation Mask Layer:

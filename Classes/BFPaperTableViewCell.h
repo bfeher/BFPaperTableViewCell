@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 // Nice circle diameter constants:
-static const CGFloat bfPaperTableViewCell_tapCircleDiameterLarge = 610.f;
-static const CGFloat bfPaperTableViewCell_tapCircleDiameterSmall = bfPaperTableViewCell_tapCircleDiameterLarge / 2.f;
+static const CGFloat bfPaperTableViewCell_tapCircleDiameterMedium = 462.f;
+static const CGFloat bfPaperTableViewCell_tapCircleDiameterLarge = bfPaperTableViewCell_tapCircleDiameterMedium * 1.4f;
+static const CGFloat bfPaperTableViewCell_tapCircleDiameterSmall = bfPaperTableViewCell_tapCircleDiameterMedium / 2.f;
 
 
 @interface BFPaperTableViewCell : UITableViewCell
