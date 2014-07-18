@@ -3,7 +3,7 @@ BFPaperTableViewCell
 
 > A subclass of UITableViewCell inspired by Google's Material Design: Paper Elements.
 
-![Animated Screenshot](link.gif "Animated Screenshot")
+![Animated Screenshot](https://raw.githubusercontent.com/bfeher/BFPaperTableViewCell/master/BFPaperTableViewCellDemoGif.gif "Animated Screenshot")
 
 
 About
