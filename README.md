@@ -1,5 +1,6 @@
 BFPaperTableViewCell
 ====================
+[![CocoaPods](https://img.shields.io/cocoapods/v/BFPaperTableViewCell.svg?style=flat)](https://github.com/bfeher/BFPaperTableViewCell)
 
 > A subclass of UITableViewCell inspired by Google's Material Design: Paper Elements.
 
@@ -77,7 +78,7 @@ Learn more at http://cocoapods.org
 Add this to your podfile to add _BFPaperTableViewCell_ to your project.
 ```ruby
 platform :ios, '7.0'
-pod 'BFPaperTableViewCell', '~> 1.0.2'
+pod 'BFPaperTableViewCell', '~> 1.0.3'
 ```
 
 
