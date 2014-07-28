@@ -18,19 +18,19 @@ You can turn off Smart Color by setting the property, `.usesSmartColor` to `NO`.
 You can set your own colors via: `.tapCircleColor` and `.backgroundFadeColor`. Note that setting these disables Smart Color.
 
 ## Properties
-`BOOL usesSmartColor;` 
+`BOOL usesSmartColor;` <br />
 A flag to set YES to use Smart Color, or NO to use a custom color scheme. While Smart Color is the default (usesSmartColor = YES), customization is cool too.
 
-`UIColor *tapCircleColor;` 
+`UIColor *tapCircleColor;` <br />
 The UIColor to use for the circle which appears where you tap. NOTE: Setting this defeats the "Smart Color" ability of the tap circle. Alpha values less than 1 are recommended.
 
-`UIColor *backgroundFadeColor;` 
+`UIColor *backgroundFadeColor;` <br />
 The UIColor to fade the background to. NOTE: Setting this defeats the "Smart Color" ability of the background fade. An alpha value of 1 is recommended, as the fade is a constant (`bfPaperCell_fadeConstant`) defined in the BFPaperTableViewCell.m. This bothers me too.
 
-`CGFloat tapCircleDiameter;` 
+`CGFloat tapCircleDiameter;` <br />
 The CGFloat value representing the Diameter of the tap-circle. By default it will be calculated to almost be big enough to cover up the whole background. Any value less than zero will result in default being used. Three pleasing sizes, `bfPaperTableViewCell_tapCircleDiameterSmall`, `bfPaperTableViewCell_tapCircleDiameterMedium`, and `bfPaperTableViewCell_tapCircleDiameterLarge` are also available for use.
 
-`BOOL rippleFromTapLocation;`
+`BOOL rippleFromTapLocation;`<br />
 A flag to set to YES to have the tap-circle ripple from point of touch. If this is set to NO, the tap-circle will always ripple from the center of the button. Default is YES.
 
 
