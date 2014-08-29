@@ -112,6 +112,7 @@
         cell = [[BFPaperTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"BFPaperCell"];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     // Configure the cell...
     

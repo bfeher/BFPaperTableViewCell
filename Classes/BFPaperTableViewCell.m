@@ -97,11 +97,11 @@ static CGFloat const bfPaperCell_fadeConstant                    = 0.15f;
     self.textLabel.text = @"BFPaperTableViewCell";
     self.textLabel.backgroundColor = [UIColor clearColor];
     
-    self.maskLayer.frame = self.contentView.frame;
+    self.maskLayer.frame = self.frame;
     
     // Setup background fade layer:
     self.backgroundColorFadeLayer = [[CALayer alloc] init];
-    self.backgroundColorFadeLayer.frame = self.contentView.bounds;
+    self.backgroundColorFadeLayer.frame = self.bounds;
     self.backgroundColorFadeLayer.backgroundColor = self.backgroundFadeColor.CGColor;
     [self.contentView.layer insertSublayer:self.backgroundColorFadeLayer atIndex:0];
 
@@ -199,7 +199,7 @@ static CGFloat const bfPaperCell_fadeConstant                    = 0.15f;
     }
     
     // Setup background fade layer:
-    self.backgroundColorFadeLayer.frame = self.contentView.bounds;
+    self.backgroundColorFadeLayer.frame = self.bounds;
     self.backgroundColorFadeLayer.backgroundColor = self.backgroundFadeColor.CGColor;
     
     // Fade the background color a bit darker:
@@ -245,7 +245,7 @@ static CGFloat const bfPaperCell_fadeConstant                    = 0.15f;
     
     // Create a mask:
     CAShapeLayer *mask = [CAShapeLayer layer];
-    mask.path = [UIBezierPath bezierPathWithRoundedRect:self.contentView.bounds cornerRadius:self.contentView.layer.cornerRadius].CGPath;
+    mask.path = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:self.layer.cornerRadius].CGPath;
     mask.fillColor = [UIColor blackColor].CGColor;
     mask.strokeColor = [UIColor clearColor].CGColor;
     mask.borderColor = [UIColor clearColor].CGColor;
@@ -256,7 +256,7 @@ static CGFloat const bfPaperCell_fadeConstant                    = 0.15f;
     
     // Add tap circle to array and view:
     [self.rippleAnimationQueue addObject:tapCircle];
-    [self.layer insertSublayer:tapCircle above:self.backgroundColorFadeLayer];
+    [self.contentView.layer insertSublayer:tapCircle above:self.backgroundColorFadeLayer];
     
     /*
      * Animations:
