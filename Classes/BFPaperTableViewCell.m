@@ -66,7 +66,7 @@ static CGFloat const bfPaperCell_fadeConstant                    = 0.15f;
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        [self setup];
+        [self setupBFPaperTableViewCell];
     }
     return self;
 }
@@ -74,12 +74,12 @@ static CGFloat const bfPaperCell_fadeConstant                    = 0.15f;
 - (void)awakeFromNib
 {
     // Initialization code
-    [self setup];
+    [self setupBFPaperTableViewCell];
 }
 
 
 #pragma mark - Setup
-- (void)setup
+- (void)setupBFPaperTableViewCell
 {
     // Defaults:
     self.usesSmartColor = YES;
