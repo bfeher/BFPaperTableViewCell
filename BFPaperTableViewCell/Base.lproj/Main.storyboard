@@ -49,12 +49,14 @@
                             <constraint firstItem="ygR-RI-ctc" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="hEC-Gv-Fau"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="lmG-8F-BQP"/>
                     <connections>
                         <outlet property="tableView" destination="ygR-RI-ctc" id="cqL-xf-WMl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="186" y="173"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
