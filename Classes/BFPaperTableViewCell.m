@@ -96,7 +96,7 @@ static CGFloat const bfPaperCell_fadeConstant                    = 0.15f;
     self.layer.masksToBounds = YES;
     self.clipsToBounds = YES;
 
-    self.textLabel.text = @"BFPaperTableViewCell";
+//    self.textLabel.text = @"BFPaperTableViewCell";
     self.textLabel.backgroundColor = [UIColor clearColor];
     
     self.maskLayer.frame = self.frame;
@@ -193,7 +193,9 @@ static CGFloat const bfPaperCell_fadeConstant                    = 0.15f;
     
     if ([[theAnimation2 valueForKey:@"id"] isEqualToString:@"fadeCircleOut"]) {
         [[self.deathRowForCircleLayers objectAtIndex:0] removeFromSuperlayer];
-        [self.deathRowForCircleLayers removeObjectAtIndex:0];
+        if (self.deathRowForCircleLayers.count > 0) {
+            [self.deathRowForCircleLayers removeObjectAtIndex:0];
+        }
     }
     else if ([[theAnimation2 valueForKey:@"id"] isEqualToString:@"removeFadeBackgroundDarker"]) {
         self.backgroundColorFadeLayer.backgroundColor = [UIColor clearColor].CGColor;
@@ -370,7 +372,9 @@ static CGFloat const bfPaperCell_fadeConstant                    = 0.15f;
     //NSLog(@"Fading away");
     
     CALayer *tempAnimationLayer = [self.rippleAnimationQueue firstObject];
-    [self.rippleAnimationQueue removeObjectAtIndex:0];
+    if (self.rippleAnimationQueue.count > 0) {
+        [self.rippleAnimationQueue removeObjectAtIndex:0];
+    }
     [self.deathRowForCircleLayers addObject:tempAnimationLayer];
     
     CABasicAnimation *fadeOut = [CABasicAnimation animationWithKeyPath:@"opacity"];
