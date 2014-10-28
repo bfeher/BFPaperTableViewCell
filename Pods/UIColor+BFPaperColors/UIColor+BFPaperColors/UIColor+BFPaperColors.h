@@ -90,6 +90,18 @@ alpha:1.0]
 + (NSString *)hexStringFromRGBColor:(UIColor *)color;
 
 
+/**
+ *  Returns a simple gradient layer built from two colors.
+ *
+ *  @param startColor A UIColor to use as the start color of the gradient layer.
+ *  @param endColor   A UIColor to use as the end color of the gradient layer.
+ *
+ *  @return A CAGradientLayer starting with the startColor and ending with the endColor.
+ */
++ (CAGradientLayer *)gradientWithStartColor:(UIColor *)startColor
+                                   endColor:(UIColor *)endColor;
+
+
 #pragma mark - Red
 + (UIColor *)paperColorRed50;
 + (UIColor *)paperColorRed100;

@@ -391,7 +391,6 @@
     return NO;
 }
 
-
 + (UIImage *)imageFromColor:(UIColor *)color
 {
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
@@ -407,6 +406,14 @@
     return image;
 }
 
++ (CAGradientLayer *)gradientWithStartColor:(UIColor *)startColor
+                                   endColor:(UIColor *)endColor
+{
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.colors = @[(id)startColor.CGColor, (id)endColor.CGColor];
+    
+    return gradient;
+}
 
 + (NSString *)hexStringFromRGBColor:(UIColor *)color
 {
@@ -432,7 +439,8 @@
     return hexColor;
 }
 
-// DEPRECATED!!
+
+#pragma mark - Deprecated!
 + (NSString *)colorToHex:(UIColor *)color
 {
     return [self hexStringFromRGBColor:color];
