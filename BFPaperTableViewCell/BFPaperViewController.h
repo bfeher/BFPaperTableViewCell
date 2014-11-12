@@ -30,6 +30,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BFPaperViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface BFPaperViewController : UITableViewController
 
 @end

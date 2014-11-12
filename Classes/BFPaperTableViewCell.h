@@ -43,8 +43,16 @@ static const CGFloat bfPaperTableViewCell_tapCircleDiameterDefault = -1.f;
 /** The UIColor to use for the circle which appears where you tap. NOTE: Setting this defeats the "Smart Color" ability of the tap circle. Alpha values less than 1 are recommended. */
 @property UIColor *tapCircleColor;
 
-/** The UIColor to fade clear backgrounds to. NOTE: Setting this defeats the "Smart Color" ability of the background fade. An alpha value of 1 is recommended, as the fade is a constant (clearBGFadeConstant) defined in the BFPaperTableViewCell.m. This bothers me too. */
-@property UIColor *backgroundFadeColor;
+/** The UIColor to fade clear backgrounds to. 
+    NOTE: Alpha values are ignored as they are controlled via the property: `backgroundFadeColor`.
+ */
+@property (nonatomic) UIColor *backgroundFadeColor;
+
+/**
+ *  A CGFloat value between 0 and 1 to which the background will fade into upon selection.
+    Default is bfPaperCell_fadeConstant which is defined in BFPaperTableViewCell.m.
+ */
+@property CGFloat backgroundFadeAlpha;
 
 /** The CGFloat value representing the Diameter of the tap-circle. By default it will be the result of MAX(self.frame.width, self.frame.height). Any value less than zero will result in default being used. The constants: tapCircleDiameterLarge, tapCircleDiameterMedium, and tapCircleDiameterSmall are also available for use. */
 @property CGFloat tapCircleDiameter;

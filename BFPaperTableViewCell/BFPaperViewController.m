@@ -83,9 +83,17 @@
  }
  */
 
+#pragma mark - Table view delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Every 5th cell gets to push:
+    if (indexPath.row % 5 == 0) {
+        [self performSegueWithIdentifier:@"push" sender:self];
+    }
+}
+
 
 #pragma mark - Table view data source
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 64;
@@ -115,6 +123,14 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     // Configure the cell...
+    
+    // Every 5th cell gets to push, so give it a disclosure indicator:
+    if (indexPath.row % 5 == 0) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
     
     // Even indexed cells will ripple from the center while odd ones will ripple from tap location:
     if (indexPath.row % 2 == 0) {
