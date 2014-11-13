@@ -56,14 +56,23 @@
     // Register BFPaperTableViewCell for our tableView:
     [self.tableView registerClass:[BFPaperTableViewCell class] forCellReuseIdentifier:@"BFPaperCell"];  // NOTE: This is not required if we declared a prototype cell in our storyboard (which this example project does). This is here purely for information purposes.
     
-    
     // Fill up an array with all the basic BFPaperColors:
-    self.colors = @[[UIColor paperColorBlue], [UIColor paperColorBlue], [UIColor paperColorRed], [UIColor paperColorPink], [UIColor paperColorPurple], [UIColor paperColorDeepPurple], [UIColor paperColorIndigo], [UIColor paperColorBlue], [UIColor paperColorLightBlue], [UIColor paperColorCyan], [UIColor paperColorTeal], [UIColor paperColorGreen], [UIColor paperColorLightGreen], [UIColor paperColorLime], [UIColor paperColorYellow], [UIColor paperColorAmber], [UIColor  paperColorDeepOrange], [UIColor paperColorBrown], [UIColor paperColorGray], [UIColor paperColorBlueGray], [UIColor paperColorGray700], [UIColor paperColorGray700]];
+    self.colors = @[[UIColor paperColorLimeA400], [UIColor paperColorLimeA400], [UIColor paperColorRed], [UIColor paperColorPink], [UIColor paperColorPurple], [UIColor paperColorDeepPurple], [UIColor paperColorIndigo], [UIColor paperColorBlue], [UIColor paperColorLightBlue], [UIColor paperColorCyan], [UIColor paperColorTeal], [UIColor paperColorGreen], [UIColor paperColorLightGreen], [UIColor paperColorLime], [UIColor paperColorYellow], [UIColor paperColorAmber], [UIColor  paperColorDeepOrange], [UIColor paperColorBrown], [UIColor paperColorGray], [UIColor paperColorBlueGray], [UIColor paperColorGray700], [UIColor paperColorGray700]];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
     self.tableView.backgroundColor = [UIColor colorWithRed:0.7 green:0.98 blue:0.7 alpha:1];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    UIImageView *bgIV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg-blue-white-arrow"]];
+    bgIV.contentMode = UIViewContentModeScaleAspectFill;
+    bgIV.frame = self.tableView.frame;
+    self.tableView.backgroundView = bgIV;
 }
 
 - (void)didReceiveMemoryWarning
@@ -168,10 +177,11 @@
     else if (indexPath.row <= self.colors.count + 1) {
         cell.textLabel.text = @"Customized!";
         cell.backgroundColor = [UIColor paperColorDeepPurple];
-        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.textLabel.textColor = [UIColor paperColorGray];
         cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterSmall;
-        cell.tapCircleColor = [[UIColor paperColorPink] colorWithAlphaComponent:0.7];
-        cell.backgroundFadeColor = [UIColor paperColorRedA100];
+        cell.tapCircleColor = [[UIColor paperColorLimeA400] colorWithAlphaComponent:0.7];
+        cell.backgroundFadeColor = [UIColor whiteColor];
+        cell.backgroundFadeAlpha = 1;
     }
     // After that, just color their background and give them white text:
     else {

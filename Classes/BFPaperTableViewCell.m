@@ -53,7 +53,6 @@ static CGFloat const bfPaperCell_tapCircleGrowthDurationConstant    = bfPaperCel
 static CGFloat const bfPaperCell_bgFadeOutAnimationDurationConstant = 0.75f;
 // -the tap-circle's size:
 static CGFloat const bfPaperCell_tapCircleDiameterStartValue        = 5.f;// for the mask
-static CGFloat const bfPaperCell_tapCircleAutoSizeConstant          = 1.75;
 static CGFloat const bfPaperCell_tapCircleGrowthBurst               = 40.f;
 // -the tap-circle's beauty:
 static CGFloat const bfPaperCell_tapFillConstant                    = 0.25f;
@@ -91,6 +90,7 @@ static CGFloat const bfPaperCell_fadeConstant                       = 0.15f;
     self.tapCircleDiameter = -1.f;
     self.rippleFromTapLocation = YES;
     self.backgroundFadeAlpha = bfPaperCell_fadeConstant;
+    self.letBackgroundLinger = YES;
     
     self.rippleAnimationQueue = [NSMutableArray array];
     self.deathRowForCircleLayers = [NSMutableArray array];
@@ -119,12 +119,11 @@ static CGFloat const bfPaperCell_fadeConstant                       = 0.15f;
 }
 
 
-
 #pragma Parent Overides
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-    NSLog(@"setSelected:\'%@\' animated:\'%@\'", selected ? @"YES" : @"NO", animated ? @"YES" : @"NO");
+    //NSLog(@"setSelected:\'%@\' animated:\'%@\'", selected ? @"YES" : @"NO", animated ? @"YES" : @"NO");
     
     if (!selected) {
         [self removeBackground];
@@ -211,18 +210,18 @@ static CGFloat const bfPaperCell_fadeConstant                       = 0.15f;
     [self fadeBGOutAndBringShadowBackToStart];
 }
 
-- (void)animationDidStop:(CAAnimation *)theAnimation2 finished:(BOOL)flag
+- (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)flag
 {
     // NSLog(@"animation ENDED");
     self.growthFinished = YES;
     
-    if ([[theAnimation2 valueForKey:@"id"] isEqualToString:@"fadeCircleOut"]) {
+    if ([[animation valueForKey:@"id"] isEqualToString:@"fadeCircleOut"]) {
         [[self.deathRowForCircleLayers objectAtIndex:0] removeFromSuperlayer];
         if (self.deathRowForCircleLayers.count > 0) {
             [self.deathRowForCircleLayers removeObjectAtIndex:0];
         }
     }
-    else if ([[theAnimation2 valueForKey:@"id"] isEqualToString:@"removeFadeBackgroundDarker"]) {
+    else if ([[animation valueForKey:@"id"] isEqualToString:@"removeFadeBackgroundDarker"]) {
         self.backgroundColorFadeView.backgroundColor = [UIColor clearColor];
         //        self.backgroundColorFadeLayer.backgroundColor = [UIColor clearColor].CGColor;
     }
@@ -338,7 +337,6 @@ static CGFloat const bfPaperCell_fadeConstant                       = 0.15f;
     [tapCircle addAnimation:fadeIn forKey:@"opacityAnimation"];
 }
 
-
 - (void)fadeBGOutAndBringShadowBackToStart
 {
     //NSLog(@"fading bg");
@@ -353,14 +351,13 @@ static CGFloat const bfPaperCell_fadeConstant                       = 0.15f;
                      }];
 }
 
-
 - (void)growTapCircleABit
 {
     //NSLog(@"expanding a bit more");
+    CGFloat tapCircleDiameterStartValue = (self.tapCircleDiameter < 0) ? MAX(self.frame.size.width, self.frame.size.height) : self.tapCircleDiameter;
+    NSLog(@"tapCircleDiameterStartValue = \'%0.2f\'", tapCircleDiameterStartValue);
     
     // Create a UIView which we can modify for its frame value later (specifically, the ability to use .center):
-    CGFloat tapCircleDiameterStartValue = (self.tapCircleDiameter < 0) ? MAX(self.frame.size.width * bfPaperCell_tapCircleAutoSizeConstant, self.frame.size.height * bfPaperCell_tapCircleAutoSizeConstant) : self.tapCircleDiameter;
-    
     UIView *tapCircleLayerSizerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tapCircleDiameterStartValue, tapCircleDiameterStartValue)];
     tapCircleLayerSizerView.center = self.rippleFromTapLocation ? self.tapPoint : CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
     
@@ -372,8 +369,7 @@ static CGFloat const bfPaperCell_fadeConstant                       = 0.15f;
     UIBezierPath *startingCirclePath = [UIBezierPath bezierPathWithRoundedRect:startingRectSizerView.frame cornerRadius:tapCircleDiameterStartValue / 2.f];
     
     // Calculate mask ending path:
-    CGFloat tapCircleDiameterEndValue = (self.tapCircleDiameter < 0) ? MAX(self.frame.size.width, self.frame.size.height) : self.tapCircleDiameter;
-    tapCircleDiameterEndValue += bfPaperCell_tapCircleGrowthBurst;
+    CGFloat tapCircleDiameterEndValue = tapCircleDiameterStartValue + bfPaperCell_tapCircleGrowthBurst;
     
     UIView *endingRectSizerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tapCircleDiameterEndValue, tapCircleDiameterEndValue)];
     endingRectSizerView.center = tapCircleLayerSizerView.center;
@@ -388,14 +384,14 @@ static CGFloat const bfPaperCell_fadeConstant                       = 0.15f;
     CABasicAnimation *tapCircleGrowthAnimation = [CABasicAnimation animationWithKeyPath:@"path"];
     tapCircleGrowthAnimation.duration = bfPaperCell_tapCircleGrowthDurationConstant;
     tapCircleGrowthAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-    tapCircleGrowthAnimation.toValue = (__bridge id)startingCirclePath.CGPath;  // LOOK: using starting for toValue!
-    tapCircleGrowthAnimation.fromValue = (__bridge id)endingCirclePath.CGPath;  // LOOK: using ending for fromValue! (I shouild fix this...)
+    tapCircleGrowthAnimation.fromValue = (__bridge id)startingCirclePath.CGPath;
+    tapCircleGrowthAnimation.toValue = (__bridge id)endingCirclePath.CGPath;
+
     tapCircleGrowthAnimation.fillMode = kCAFillModeForwards;
     tapCircleGrowthAnimation.removedOnCompletion = NO;
     
     [tapCircle addAnimation:tapCircleGrowthAnimation forKey:@"animatePath"];
 }
-
 
 - (void)fadeTapCircleOut
 {

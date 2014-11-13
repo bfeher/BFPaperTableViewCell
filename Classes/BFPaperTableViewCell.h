@@ -54,6 +54,11 @@ static const CGFloat bfPaperTableViewCell_tapCircleDiameterDefault = -1.f;
  */
 @property CGFloat backgroundFadeAlpha;
 
+/**
+ *  WRITE HERE
+ */
+@property BOOL letBackgroundLinger;
+
 /** The CGFloat value representing the Diameter of the tap-circle. By default it will be the result of MAX(self.frame.width, self.frame.height). Any value less than zero will result in default being used. The constants: tapCircleDiameterLarge, tapCircleDiameterMedium, and tapCircleDiameterSmall are also available for use. */
 @property CGFloat tapCircleDiameter;
 
