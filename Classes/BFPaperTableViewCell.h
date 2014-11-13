@@ -44,19 +44,15 @@ static const CGFloat bfPaperTableViewCell_tapCircleDiameterDefault = -1.f;
 @property UIColor *tapCircleColor;
 
 /** The UIColor to fade clear backgrounds to. 
-    NOTE: Alpha values are ignored as they are controlled via the property: `backgroundFadeColor`.
- */
+    NOTE: Alpha values are ignored as they are controlled via the property: `backgroundFadeColor`. */
 @property (nonatomic) UIColor *backgroundFadeColor;
 
-/**
- *  A CGFloat value between 0 and 1 to which the background will fade into upon selection.
-    Default is bfPaperCell_fadeConstant which is defined in BFPaperTableViewCell.m.
- */
+/** A CGFloat value between 0 and 1 to which the background will fade into upon selection.
+    Default is bfPaperCell_fadeConstant which is defined in BFPaperTableViewCell.m. */
 @property CGFloat backgroundFadeAlpha;
 
-/**
- *  WRITE HERE
- */
+/** A BOOL flag that determines whether or not to keep the background around after a tap, essentially "highlighting/selecting" the cell. Note that this does not trigger setSelected:! It is purely aesthetic. Also this kinda clashes with cell.selectionStyle, so by defualt the constructor sets that to UITableViewCellSelectionStyleNone.
+    Default is YES. */
 @property BOOL letBackgroundLinger;
 
 /** The CGFloat value representing the Diameter of the tap-circle. By default it will be the result of MAX(self.frame.width, self.frame.height). Any value less than zero will result in default being used. The constants: tapCircleDiameterLarge, tapCircleDiameterMedium, and tapCircleDiameterSmall are also available for use. */

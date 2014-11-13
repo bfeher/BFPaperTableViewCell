@@ -29,11 +29,14 @@
 
 
 #import "BFPaperViewController.h"
-#import "UIColor+BFPaperColors.h"
+// Classes:
 #import "BFPaperTableViewCell.h"
+// Pods:
+#import "UIColor+BFPaperColors.h"
+
+
 
 @interface BFPaperViewController ()
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property NSArray *colors;
 @end
 
@@ -52,6 +55,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"BFPaperTableViewCell";
     
     // Register BFPaperTableViewCell for our tableView:
     [self.tableView registerClass:[BFPaperTableViewCell class] forCellReuseIdentifier:@"BFPaperCell"];  // NOTE: This is not required if we declared a prototype cell in our storyboard (which this example project does). This is here purely for information purposes.
@@ -128,8 +132,6 @@
     if (!cell) {
         cell = [[BFPaperTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"BFPaperCell"];
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     // Configure the cell...
     
@@ -148,7 +150,7 @@
     }
     else {
         cell.rippleFromTapLocation = YES;
-        cell.textLabel.text = @"BFPaperTableViewCell";
+        cell.textLabel.text = @"Ripple from tap location";
     }
 
     // Demo 2 clear cells:
@@ -177,11 +179,12 @@
     else if (indexPath.row <= self.colors.count + 1) {
         cell.textLabel.text = @"Customized!";
         cell.backgroundColor = [UIColor paperColorDeepPurple];
-        cell.textLabel.textColor = [UIColor paperColorGray];
+        cell.textLabel.textColor = [UIColor paperColorLightBlue];
         cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterSmall;
         cell.tapCircleColor = [[UIColor paperColorLimeA400] colorWithAlphaComponent:0.7];
         cell.backgroundFadeColor = [UIColor whiteColor];
         cell.backgroundFadeAlpha = 1;
+        cell.letBackgroundLinger = NO;
     }
     // After that, just color their background and give them white text:
     else {
@@ -191,11 +194,8 @@
         cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterDefault;
     }
     
-    cell.textLabel.backgroundColor = [UIColor clearColor];  // THIS IS SUPER IMPORTANT!! SET THIS LAST RIGHT BEFORE RETURNING.
-
     return cell;
 }
-
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {

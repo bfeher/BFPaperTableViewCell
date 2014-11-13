@@ -11,26 +11,32 @@ About
 ---------
 _BFPaperTableViewCell_ is a subclass of UITableViewCell that behaves much like the new paper table cells from Google's Material Design Labs.
 All animation are asynchronous and are performed on sublayers.
-_BFPaperTableViewCells_ work right away with pleasing default behaviors, however they can be easily customized! The tap-circle color, background fade color, and tap-circle diameter are all readily customizable via public properties.
+_BFPaperTableViewCells_ work right away with pleasing default behaviors, however they can be easily customized! The tap-circle color, background fade color, background fade alpha, background highlight (linger or fade away), tap-circle ripple locaiton, and tap-circle diameter are all readily customizable via public properties.
 
 By default, _BFPaperTableViewCells_ use "Smart Color" which will match the tap-circle and background fade colors to the color of the `textLabel`.
 You can turn off Smart Color by setting the property, `.usesSmartColor` to `NO`. If you disable Smart Color, a gray color will be used by default for both the tap-circle and the background color fade.
 You can set your own colors via: `.tapCircleColor` and `.backgroundFadeColor`. Note that setting these disables Smart Color.
 
 ## Properties
-`BOOL usesSmartColor;` <br />
+`BOOL usesSmartColor` <br />
 A flag to set YES to use Smart Color, or NO to use a custom color scheme. While Smart Color is the default (usesSmartColor = YES), customization is cool too.
 
-`UIColor *tapCircleColor;` <br />
+`UIColor *tapCircleColor` <br />
 The UIColor to use for the circle which appears where you tap. NOTE: Setting this defeats the "Smart Color" ability of the tap circle. Alpha values less than 1 are recommended.
 
-`UIColor *backgroundFadeColor;` <br />
+`UIColor *backgroundFadeColor` <br />
 The UIColor to fade the background to. NOTE: Setting this defeats the "Smart Color" ability of the background fade. An alpha value of 1 is recommended, as the fade is a constant (`bfPaperCell_fadeConstant`) defined in the BFPaperTableViewCell.m. This bothers me too.
 
-`CGFloat tapCircleDiameter;` <br />
+`CGFloat backgroundFadeAlpha` <br />
+A CGFloat value between 0 and 1 to which the background will fade into upon selection. Default is `bfPaperCell_fadeConstant` which is defined in BFPaperTableViewCell.m.
+
+`BOOL letBackgroundLinger`<br />
+A BOOL flag that determines whether or not to keep the background around after a tap, essentially "highlighting/selecting" the cell. Note that this does not trigger `setSelected:`! It is purely aesthetic. Also this kinda clashes with `cell.selectionStyle`, so by defualt the constructor sets that to `UITableViewCellSelectionStyleNone`. Default is YES.
+
+`CGFloat tapCircleDiameter` <br />
 The CGFloat value representing the Diameter of the tap-circle. By default it will be calculated to almost be big enough to cover up the whole background. Any value less than zero will result in default being used. Three pleasing sizes, `bfPaperTableViewCell_tapCircleDiameterSmall`, `bfPaperTableViewCell_tapCircleDiameterMedium`, and `bfPaperTableViewCell_tapCircleDiameterLarge` are also available for use.
 
-`BOOL rippleFromTapLocation;`<br />
+`BOOL rippleFromTapLocation`<br />
 A flag to set to YES to have the tap-circle ripple from point of touch. If this is set to NO, the tap-circle will always ripple from the center of the button. Default is YES.
 
 
@@ -60,10 +66,11 @@ If you use storyboards with prototype cells, be sure to change the prototype cel
     cell = [[BFPaperTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"BFPaperCell"];
   }
   cell.rippleFromTapLocation = NO; // Will always ripple from center if NO.
-  cell.tapCircleColor = [[UIColor paperColorDeepPurple] colorWithAlphaComponent:0.3];
+  cell.tapCircleColor = [[UIColor paperColorDeepPurple] colorWithAlphaComponent:0.3f];
   cell.backgroundFadeColor = [UIColor paperColorBlue];
+  cell.backgroundFadeAlpha = 0.7f;
+  cell.letBackgroundLinger = NO;
   cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterSmall;
-  cell.textLabel.backgroundColor = [UIColor clearColor];  // THIS IS SUPER IMPORTANT!! SET THIS LAST RIGHT BEFORE RETURNING.
   return cell;
 }
 ```
@@ -78,7 +85,7 @@ Learn more at http://cocoapods.org
 Add this to your podfile to add _BFPaperTableViewCell_ to your project.
 ```ruby
 platform :ios, '7.0'
-pod 'BFPaperTableViewCell', '~> 1.2.3'
+pod 'BFPaperTableViewCell', '~> 1.3.0'
 ```
 
 

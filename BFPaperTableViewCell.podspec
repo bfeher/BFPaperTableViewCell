@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "BFPaperTableViewCell"
-  s.version      = "1.2.3"
+  s.version      = "1.3.0"
   s.summary      = "A flat button inspired by Google Material Design's Paper theme."
   s.homepage     = "https://github.com/bfeher/BFPaperTableViewCell"
   s.license      = { :type => 'MIT', :file => 'LICENSE.md' }

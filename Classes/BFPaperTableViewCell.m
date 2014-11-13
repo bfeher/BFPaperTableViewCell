@@ -52,7 +52,7 @@ static CGFloat const bfPaperCell_animationDurationConstant          = 0.2f;
 static CGFloat const bfPaperCell_tapCircleGrowthDurationConstant    = bfPaperCell_animationDurationConstant * 2;
 static CGFloat const bfPaperCell_bgFadeOutAnimationDurationConstant = 0.75f;
 // -the tap-circle's size:
-static CGFloat const bfPaperCell_tapCircleDiameterStartValue        = 5.f;// for the mask
+static CGFloat const bfPaperCell_tapCircleDiameterStartValue        = 5.f;  // for the mask
 static CGFloat const bfPaperCell_tapCircleGrowthBurst               = 40.f;
 // -the tap-circle's beauty:
 static CGFloat const bfPaperCell_tapFillConstant                    = 0.25f;
@@ -100,7 +100,6 @@ static CGFloat const bfPaperCell_fadeConstant                       = 0.15f;
     self.layer.masksToBounds = YES;
     self.clipsToBounds = YES;
 
-//    self.textLabel.text = @"BFPaperTableViewCell";
     self.textLabel.backgroundColor = [UIColor clearColor];
     
     self.maskLayer.frame = self.frame;
@@ -125,12 +124,24 @@ static CGFloat const bfPaperCell_fadeConstant                       = 0.15f;
     [super setSelected:selected animated:animated];
     //NSLog(@"setSelected:\'%@\' animated:\'%@\'", selected ? @"YES" : @"NO", animated ? @"YES" : @"NO");
     
+    if (!self.letBackgroundLinger) {
+        return; // If we are not letting the background linger, just return as we have nothing more to do here.
+    }
+    
     if (!selected) {
         [self removeBackground];
     }
     else {
         [self fadeBackgroundIn];
     }
+}
+
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+
+    // Lets go ahead and "reset" our cell:
+    [self setupBFPaperTableViewCell];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -150,6 +161,9 @@ static CGFloat const bfPaperCell_fadeConstant                       = 0.15f;
     [super touchesEnded:touches withEvent:event];
     
     [self removeCircle];
+    if (!self.letBackgroundLinger) {
+        [self removeBackground];
+    }
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
@@ -246,7 +260,7 @@ static CGFloat const bfPaperCell_fadeConstant                       = 0.15f;
                           delay:0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
-                         self.backgroundColorFadeView.alpha = self.backgroundFadeAlpha;//(self.backgroundFadeAlpha == -1) ? bfPaperCell_fadeConstant : self.backgroundFadeAlpha;
+                         self.backgroundColorFadeView.alpha = self.backgroundFadeAlpha;
                      }
                      completion:^(BOOL finished) {
                      }];
@@ -305,7 +319,6 @@ static CGFloat const bfPaperCell_fadeConstant                       = 0.15f;
     // Add tap circle to array and view:
     [self.rippleAnimationQueue addObject:tapCircle];
     [self.contentView.layer insertSublayer:tapCircle above:self.backgroundColorFadeView.layer];
-    //    [self.contentView.layer insertSublayer:tapCircle atIndex:0];//above:self.backgroundColorFadeLayer];
     
     
     /*
