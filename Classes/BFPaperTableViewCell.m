@@ -99,8 +99,6 @@ static CGFloat const bfPaperCell_fadeConstant                       = 0.15f;
     
     self.layer.masksToBounds = YES;
     self.clipsToBounds = YES;
-
-    self.textLabel.backgroundColor = [UIColor clearColor];
     
     self.maskLayer.frame = self.frame;
     
@@ -111,7 +109,8 @@ static CGFloat const bfPaperCell_fadeConstant                       = 0.15f;
     self.backgroundColorFadeView.alpha = 0;
     [self.contentView insertSubview:self.backgroundColorFadeView atIndex:0];
 
-    
+    self.textLabel.backgroundColor = [UIColor clearColor];  // We don't want the text label to occlude our tap circles!
+
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:nil];
     tapGestureRecognizer.delegate = self;
     [self addGestureRecognizer:tapGestureRecognizer];
@@ -136,13 +135,16 @@ static CGFloat const bfPaperCell_fadeConstant                       = 0.15f;
     }
 }
 
+/*
 - (void)prepareForReuse
 {
     [super prepareForReuse];
 
     // Lets go ahead and "reset" our cell:
+    // In your subclass, this is where you would call your custom setup.
     [self setupBFPaperTableViewCell];
 }
+*/
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -237,7 +239,6 @@ static CGFloat const bfPaperCell_fadeConstant                       = 0.15f;
     }
     else if ([[animation valueForKey:@"id"] isEqualToString:@"removeFadeBackgroundDarker"]) {
         self.backgroundColorFadeView.backgroundColor = [UIColor clearColor];
-        //        self.backgroundColorFadeLayer.backgroundColor = [UIColor clearColor].CGColor;
     }
 }
 
@@ -263,6 +264,7 @@ static CGFloat const bfPaperCell_fadeConstant                       = 0.15f;
                          self.backgroundColorFadeView.alpha = self.backgroundFadeAlpha;
                      }
                      completion:^(BOOL finished) {
+                         // Nothing to do here unless you really want to.
                      }];
 }
 
@@ -361,6 +363,7 @@ static CGFloat const bfPaperCell_fadeConstant                       = 0.15f;
                          self.backgroundColorFadeView.alpha = 0;
                      }
                      completion:^(BOOL finished) {
+                         // Nothing to do here unless you really want to.
                      }];
 }
 
@@ -368,7 +371,6 @@ static CGFloat const bfPaperCell_fadeConstant                       = 0.15f;
 {
     //NSLog(@"expanding a bit more");
     CGFloat tapCircleDiameterStartValue = (self.tapCircleDiameter < 0) ? MAX(self.frame.size.width, self.frame.size.height) : self.tapCircleDiameter;
-    NSLog(@"tapCircleDiameterStartValue = \'%0.2f\'", tapCircleDiameterStartValue);
     
     // Create a UIView which we can modify for its frame value later (specifically, the ability to use .center):
     UIView *tapCircleLayerSizerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tapCircleDiameterStartValue, tapCircleDiameterStartValue)];

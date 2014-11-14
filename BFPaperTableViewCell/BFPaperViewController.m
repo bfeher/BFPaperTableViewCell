@@ -61,7 +61,7 @@
     [self.tableView registerClass:[BFPaperTableViewCell class] forCellReuseIdentifier:@"BFPaperCell"];  // NOTE: This is not required if we declared a prototype cell in our storyboard (which this example project does). This is here purely for information purposes.
     
     // Fill up an array with all the basic BFPaperColors:
-    self.colors = @[[UIColor paperColorLimeA400], [UIColor paperColorLimeA400], [UIColor paperColorRed], [UIColor paperColorPink], [UIColor paperColorPurple], [UIColor paperColorDeepPurple], [UIColor paperColorIndigo], [UIColor paperColorBlue], [UIColor paperColorLightBlue], [UIColor paperColorCyan], [UIColor paperColorTeal], [UIColor paperColorGreen], [UIColor paperColorLightGreen], [UIColor paperColorLime], [UIColor paperColorYellow], [UIColor paperColorAmber], [UIColor  paperColorDeepOrange], [UIColor paperColorBrown], [UIColor paperColorGray], [UIColor paperColorBlueGray], [UIColor paperColorGray700], [UIColor paperColorGray700]];
+    self.colors = @[[UIColor paperColorRed], [UIColor paperColorPink], [UIColor paperColorPurple], [UIColor paperColorDeepPurple], [UIColor paperColorIndigo], [UIColor paperColorBlue], [UIColor paperColorLightBlue], [UIColor paperColorCyan], [UIColor paperColorTeal], [UIColor paperColorGreen], [UIColor paperColorLightGreen], [UIColor paperColorLime], [UIColor paperColorYellow], [UIColor paperColorAmber], [UIColor  paperColorDeepOrange], [UIColor paperColorBrown], [UIColor paperColorGray], [UIColor paperColorBlueGray], [UIColor paperColorGray700], [UIColor paperColorGray700]];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -135,6 +135,10 @@
     
     // Configure the cell...
     
+    // This is a whole bunch of really BAD ways to customize cells that I'm, just doing for the demo.
+    // I hope you won't attempt to customize your cells in such a way and would rather sub-class BFPaperTableViewCell and do your customizations in said subclass.
+    // Or at least just don't do it like this ;p
+    
     // Every 5th cell gets to push, so give it a disclosure indicator:
     if (indexPath.row % 5 == 0) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -156,14 +160,14 @@
     // Demo 2 clear cells:
     if (indexPath.row == 0) {
         cell.backgroundColor = [UIColor clearColor];
-        cell.textLabel.textColor = [self.colors objectAtIndex:indexPath.row];
+        cell.textLabel.textColor = [UIColor paperColorLimeA400];
         cell.usesSmartColor = YES;
         cell.textLabel.text = @"Clear, Smart Color";
         cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterDefault;
     }
     else if (indexPath.row == 1) {
         cell.backgroundColor = [UIColor clearColor];
-        cell.textLabel.textColor = [self.colors objectAtIndex:indexPath.row];
+        cell.textLabel.textColor = [UIColor paperColorLimeA400];
         cell.usesSmartColor = NO;
         cell.textLabel.text = @"Clear, !Smart Color";
         cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterDefault;
@@ -175,8 +179,15 @@
         cell.usesSmartColor = YES;
         cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterDefault;
     }
-    // Customize two cells between white bg cells and color bg cells
-    else if (indexPath.row <= self.colors.count + 1) {
+    // After that, just color their background and give them white text:
+    else if (!(indexPath.row > (self.colors.count * 2) - 3)) {
+        cell.backgroundColor = [self.colors objectAtIndex:indexPath.row % self.colors.count];
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.usesSmartColor = YES;
+        cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterDefault;
+    }
+    // Customize last two cells:
+    else {//if (indexPath.row > (self.colors.count * 2) - 3) {
         cell.textLabel.text = @"Customized!";
         cell.backgroundColor = [UIColor paperColorDeepPurple];
         cell.textLabel.textColor = [UIColor paperColorLightBlue];
@@ -186,13 +197,8 @@
         cell.backgroundFadeAlpha = 1;
         cell.letBackgroundLinger = NO;
     }
-    // After that, just color their background and give them white text:
-    else {
-        cell.backgroundColor = [self.colors objectAtIndex:indexPath.row % self.colors.count];
-        cell.textLabel.textColor = [UIColor whiteColor];
-        cell.usesSmartColor = YES;
-        cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterDefault;
-    }
+    
+    cell.textLabel.backgroundColor = [UIColor clearColor];  // If it's not clear, the tap circles and fade layers are occluded by this label's background.
     
     return cell;
 }
