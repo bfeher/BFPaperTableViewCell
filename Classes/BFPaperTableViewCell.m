@@ -34,7 +34,6 @@
 @property CGRect fadeAndClippingMaskRect;
 @property CGPoint tapPoint;
 @property UIView *backgroundColorFadeView;
-@property CAShapeLayer *maskLayer;
 @property BOOL beganHighlight;
 @property BOOL beganSelection;
 @property BOOL haveTapped;
@@ -106,8 +105,6 @@ static CGFloat const bfPaperCell_fadeConstant                       = 0.15f;
     self.layer.masksToBounds = YES;
     self.clipsToBounds = YES;
     
-    self.maskLayer.frame = self.frame;
-    
     // Setup background fade layer:
     self.backgroundColorFadeView = [[UIView alloc] init];
     self.backgroundColorFadeView.frame = self.bounds;
@@ -152,6 +149,17 @@ static CGFloat const bfPaperCell_fadeConstant                       = 0.15f;
 }
 */
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.fadeAndClippingMaskRect = CGRectMake(self.bounds.origin.x, self.bounds.origin.y , self.bounds.size.width, self.bounds.size.height);
+    self.backgroundColorFadeView.frame = self.fadeAndClippingMaskRect;
+    
+    [self setNeedsDisplay];
+    [self.layer setNeedsDisplay];
+}
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesBegan:touches withEvent:event];
@@ -180,17 +188,6 @@ static CGFloat const bfPaperCell_fadeConstant                       = 0.15f;
 
     [self removeCircle];
     [self removeBackground];
-}
-
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    
-    self.fadeAndClippingMaskRect = CGRectMake(self.bounds.origin.x, self.bounds.origin.y , self.bounds.size.width, self.bounds.size.height);
-    self.backgroundColorFadeView.frame = self.fadeAndClippingMaskRect;
-    
-    [self setNeedsDisplay];
-    [self.layer setNeedsDisplay];
 }
 
 
@@ -271,7 +268,6 @@ static CGFloat const bfPaperCell_fadeConstant                       = 0.15f;
         self.backgroundFadeColor = self.usesSmartColor ? self.textLabel.textColor : BFPAPERCELL__DUMB_FADE_COLOR;
     }
     
-//    self.backgroundColorFadeView.frame = self.bounds;
     self.backgroundColorFadeView.backgroundColor = self.backgroundFadeColor;
     
     [UIView animateWithDuration:bfPaperCell_animationDurationConstant
