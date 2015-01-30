@@ -30,7 +30,7 @@
 
 #import "BFPaperViewController.h"
 // Classes:
-#import "BFPaperTableViewCell.h"
+#import "SubclassOfPaperTableViewCell.h"
 // Pods:
 #import "UIColor+BFPaperColors.h"
 
@@ -58,7 +58,7 @@
     self.title = @"BFPaperTableViewCell";
     
     // Register BFPaperTableViewCell for our tableView:
-    [self.tableView registerClass:[BFPaperTableViewCell class] forCellReuseIdentifier:@"BFPaperCell"];  // NOTE: This is not required if we declared a prototype cell in our storyboard (which this example project does). This is here purely for information purposes.
+    [self.tableView registerClass:[SubclassOfPaperTableViewCell class] forCellReuseIdentifier:@"BFPaperCell"];  // NOTE: This is not required if we declared a prototype cell in our storyboard (which this example project does). This is here purely for information purposes.
     
     // Fill up an array with all the basic BFPaperColors:
     self.colors = @[[UIColor paperColorRed], [UIColor paperColorPink], [UIColor paperColorPurple], [UIColor paperColorDeepPurple], [UIColor paperColorIndigo], [UIColor paperColorBlue], [UIColor paperColorLightBlue], [UIColor paperColorCyan], [UIColor paperColorTeal], [UIColor paperColorGreen], [UIColor paperColorLightGreen], [UIColor paperColorLime], [UIColor paperColorYellow], [UIColor paperColorAmber], [UIColor  paperColorDeepOrange], [UIColor paperColorBrown], [UIColor paperColorGray], [UIColor paperColorBlueGray], [UIColor paperColorGray700], [UIColor paperColorGray700]];
@@ -127,10 +127,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    BFPaperTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BFPaperCell" forIndexPath:indexPath];
+    SubclassOfPaperTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BFPaperCell" forIndexPath:indexPath];
     
     if (!cell) {
-        cell = [[BFPaperTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"BFPaperCell"];
+        cell = [[SubclassOfPaperTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"BFPaperCell"];
     }
     
     // Configure the cell...
@@ -194,7 +194,6 @@
         cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterSmall;
         cell.tapCircleColor = [[UIColor paperColorLimeA400] colorWithAlphaComponent:0.7];
         cell.backgroundFadeColor = [UIColor whiteColor];
-        cell.backgroundFadeAlpha = 1;
         cell.letBackgroundLinger = NO;
     }
     

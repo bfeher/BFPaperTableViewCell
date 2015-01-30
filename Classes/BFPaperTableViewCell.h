@@ -34,31 +34,43 @@
 extern const CGFloat bfPaperTableViewCell_tapCircleDiameterMedium;
 extern const CGFloat bfPaperTableViewCell_tapCircleDiameterLarge;
 extern const CGFloat bfPaperTableViewCell_tapCircleDiameterSmall;
+extern const CGFloat bfPaperTableViewCell_tapCircleDiameterFull;
 extern const CGFloat bfPaperTableViewCell_tapCircleDiameterDefault;
 
 @interface BFPaperTableViewCell : UITableViewCell
+
+#pragma mark - Properties
+#pragma mark Animation
+/** A CGFLoat representing the duration of the animations which take place on touch DOWN! Default is 0.25f seconds. (Go Steelers) */
+@property CGFloat touchDownAnimationDuration;
+/** A CGFLoat representing the duration of the animations which take place on touch UP! Default is 2 * touchDownAnimationDuration seconds. */
+@property CGFloat touchUpAnimationDuration;
+
+
+#pragma mark Prettyness and Behaviour
 /** A flag to set YES to use Smart Color, or NO to use a custom color scheme. While Smart Color is recommended, customization is cool too. */
 @property (nonatomic) BOOL usesSmartColor;
+
+/** A CGFLoat representing the diameter of the tap-circle as soon as it spawns, before it grows. Default is 5.f. */
+@property CGFloat tapCircleDiameterStartValue;
+
+/** The CGFloat value representing the Diameter of the tap-circle. By default it will be the result of MAX(self.frame.width, self.frame.height). tapCircleDiameterFull will calculate a circle that always fills the entire view. Any value less than or equal to tapCircleDiameterFull will result in default being used. The constants: tapCircleDiameterLarge, tapCircleDiameterMedium, and tapCircleDiameterSmall are also available for use. */
+@property CGFloat tapCircleDiameter;
+
+/** The CGFloat value representing how much we should increase the diameter of the tap-circle by when we burst it. Default is 100.f. */
+@property CGFloat tapCircleBurstAmount;
 
 /** The UIColor to use for the circle which appears where you tap. NOTE: Setting this defeats the "Smart Color" ability of the tap circle. Alpha values less than 1 are recommended. */
 @property UIColor *tapCircleColor;
 
-/** The UIColor to fade clear backgrounds to. 
-    NOTE: Alpha values are ignored as they are controlled via the property: `backgroundFadeColor`. */
-@property (nonatomic) UIColor *backgroundFadeColor;
+/** The UIColor to fade clear backgrounds to. NOTE: Setting this defeats the "Smart Color" ability of the background fade. Alpha values less than 1 are recommended. */
+@property UIColor *backgroundFadeColor;
 
-/** A CGFloat value between 0 and 1 to which the background will fade into upon selection.
-    Default is bfPaperCell_fadeConstant which is defined in BFPaperTableViewCell.m. */
-@property CGFloat backgroundFadeAlpha;
+/** A flag to set to YES to have the tap-circle ripple from point of touch. If this is set to NO, the tap-circle will always ripple from the center of the tab. Default is YES. */
+@property (nonatomic) BOOL rippleFromTapLocation;
 
 /** A BOOL flag that determines whether or not to keep the background around after a tap, essentially "highlighting/selecting" the cell. Note that this does not trigger setSelected:! It is purely aesthetic. Also this kinda clashes with cell.selectionStyle, so by defualt the constructor sets that to UITableViewCellSelectionStyleNone.
     Default is YES. */
 @property BOOL letBackgroundLinger;
-
-/** The CGFloat value representing the Diameter of the tap-circle. By default it will be the result of MAX(self.frame.width, self.frame.height). Any value less than zero will result in default being used. The constants: tapCircleDiameterLarge, tapCircleDiameterMedium, and tapCircleDiameterSmall are also available for use. */
-@property CGFloat tapCircleDiameter;
-
-/** A flag to set to YES to have the tap-circle ripple from point of touch. If this is set to NO, the tap-circle will always ripple from the center of the button. Default is YES. */
-@property BOOL rippleFromTapLocation;
 
 @end
