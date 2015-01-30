@@ -163,28 +163,28 @@
         cell.textLabel.textColor = [UIColor paperColorLimeA400];
         cell.usesSmartColor = YES;
         cell.textLabel.text = @"Clear, Smart Color";
-        cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterDefault;
+        cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterFull;
     }
     else if (indexPath.row == 1) {
         cell.backgroundColor = [UIColor clearColor];
         cell.textLabel.textColor = [UIColor paperColorLimeA400];
         cell.usesSmartColor = NO;
         cell.textLabel.text = @"Clear, !Smart Color";
-        cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterDefault;
+        cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterFull;
     }
     // The rest of the first half should be white with colored text:
     else if (indexPath.row < self.colors.count){
         cell.backgroundColor = [UIColor whiteColor];
         cell.textLabel.textColor = [self.colors objectAtIndex:indexPath.row];
         cell.usesSmartColor = YES;
-        cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterDefault;
+        cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterFull;
     }
     // After that, just color their background and give them white text:
     else if (!(indexPath.row > (self.colors.count * 2) - 3)) {
         cell.backgroundColor = [self.colors objectAtIndex:indexPath.row % self.colors.count];
         cell.textLabel.textColor = [UIColor whiteColor];
         cell.usesSmartColor = YES;
-        cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterDefault;
+        cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterFull;
     }
     // Customize last two cells:
     else {//if (indexPath.row > (self.colors.count * 2) - 3) {

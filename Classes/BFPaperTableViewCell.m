@@ -46,6 +46,7 @@
 @property BOOL fadedBackgroundInAlready;
 @property UIColor *dumbTapCircleFillColor;
 @property UIColor *dumbBackgroundFadeColor;
+@property (nonatomic, copy) void (^removeEffectsQueue)();
 @end
 
 @implementation BFPaperTableViewCell
@@ -98,7 +99,7 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
     // Defaults for visual properties:                                                                                      //
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Animation:
-    self.touchDownAnimationDuration  = 0.4f;
+    self.touchDownAnimationDuration  = 0.3f;
     self.touchUpAnimationDuration    = self.touchDownAnimationDuration * 2.5f;
     // Prettyness and Behaviour:
     self.usesSmartColor              = YES;
@@ -111,6 +112,7 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
     self.dumbTapCircleFillColor      = [UIColor colorWithWhite:0.3 alpha:0.25f];
     self.dumbBackgroundFadeColor     = [UIColor colorWithWhite:0.3 alpha:0.15f];
     self.letBackgroundLinger         = YES;
+    self.alwaysCompleteFullAnimation = YES;
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     
@@ -242,23 +244,82 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
             [self.deathRowForCircleLayers removeObjectAtIndex:0];
         }
     }
+    
+    if (self.alwaysCompleteFullAnimation) {
+        if (self.removeEffectsQueue) {
+            self.removeEffectsQueue();
+            self.removeEffectsQueue = nil;
+        }
+    }
 }
 
 - (void)removeCircle
 {
-    self.letGo = YES;
-    [self burstTapCircle];
+    if (!self.alwaysCompleteFullAnimation) {
+        self.letGo = YES;
+        [self burstTapCircle];
+    }
+    else {
+        //////////////////////////////////////////////////////////////////////////////
+        // Special thanks to github user @ThePantsThief for providing this code!    //
+        //////////////////////////////////////////////////////////////////////////////
+        if (self.growthFinished) {
+            self.letGo = YES;
+            [self burstTapCircle];
+        } else {
+            void (^oldCompletion)() = self.removeEffectsQueue;
+            __weak typeof(self) weakSelf = self;
+            
+            self.removeEffectsQueue = ^void() {
+                if (oldCompletion)
+                    oldCompletion();
+                weakSelf.letGo = YES;
+                [weakSelf burstTapCircle];
+            };
+        }
+    }
 }
 
 - (void)removeBackground
 {
-    if (self.fadedBackgroundOutAlready) {
-        return;
+    if (!self.alwaysCompleteFullAnimation) {
+        if (self.fadedBackgroundOutAlready) {
+            return;
+        }
+        self.fadedBackgroundOutAlready = YES;
+        self.fadedBackgroundInAlready = NO;
+        
+        [self fadeBGOutAndBringShadowBackToStart];
     }
-    self.fadedBackgroundOutAlready = YES;
-    self.fadedBackgroundInAlready = NO;
-    
-    [self fadeBGOutAndBringShadowBackToStart];
+    else {
+        //////////////////////////////////////////////////////////////////////////////
+        // Special thanks to github user @ThePantsThief for providing this code!    //
+        //////////////////////////////////////////////////////////////////////////////
+        if (self.growthFinished) {
+            if (self.fadedBackgroundOutAlready) {
+                return;
+            }
+            self.fadedBackgroundOutAlready = YES;
+            self.fadedBackgroundInAlready = NO;
+            
+            [self fadeBGOutAndBringShadowBackToStart];
+        } else {
+            void (^oldCompletion)() = self.removeEffectsQueue;
+            __weak typeof(self) weakSelf = self;
+            
+            self.removeEffectsQueue = ^void() {
+                if (oldCompletion)
+                    oldCompletion();
+                if (weakSelf.fadedBackgroundOutAlready) {
+                    return;
+                }
+                weakSelf.fadedBackgroundOutAlready = YES;
+                weakSelf.fadedBackgroundInAlready = NO;
+                
+                [weakSelf fadeBGOutAndBringShadowBackToStart];
+            };
+        }
+    }
 }
 
 - (void)fadeBackgroundIn
@@ -352,6 +413,7 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
     
     // Grow tap-circle animation (performed on mask layer):
     CABasicAnimation *tapCircleGrowthAnimation = [CABasicAnimation animationWithKeyPath:@"path"];
+    tapCircleGrowthAnimation.delegate = self;
     tapCircleGrowthAnimation.duration = self.touchDownAnimationDuration;
     tapCircleGrowthAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     tapCircleGrowthAnimation.fromValue = (__bridge id)startingCirclePath.CGPath;

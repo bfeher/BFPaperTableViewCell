@@ -21,23 +21,35 @@ You can set your own colors via: `.tapCircleColor` and `.backgroundFadeColor`. N
 `BOOL usesSmartColor` <br />
 A flag to set YES to use Smart Color, or NO to use a custom color scheme. While Smart Color is the default (usesSmartColor = YES), customization is cool too.
 
+`CGFloat touchDownAnimationDuration` <br />
+A CGFLoat representing the duration of the animations which take place on touch DOWN! Default is `0.25f` seconds. (Go Steelers)
+
+`CGFloat touchUpAnimationDuration` <br />
+A CGFLoat representing the duration of the animations which take place on touch UP! Default is `2 * touchDownAnimationDuration` seconds.
+
+`CGFloat tapCircleDiameterStartValue` <br />
+A CGFLoat representing the diameter of the tap-circle as soon as it spawns, before it grows. Default is `5.f`.
+
+`CGFloat tapCircleDiameter` <br />
+The CGFloat value representing the Diameter of the tap-circle. By default it will be the result of `MAX(self.frame.width, self.frame.height)`. `tapCircleDiameterFull` will calculate a circle that always fills the entire view. Any value less than or equal to `tapCircleDiameterFull` will result in default being used. The constants: `tapCircleDiameterLarge`, `tapCircleDiameterMedium`, and `tapCircleDiameterSmall` are also available for use. */
+
+`CGFloat tapCircleBurstAmount` <br />
+The CGFloat value representing how much we should increase the diameter of the tap-circle by when we burst it. Default is `100.f`.
+
 `UIColor *tapCircleColor` <br />
-The UIColor to use for the circle which appears where you tap. NOTE: Setting this defeats the "Smart Color" ability of the tap circle. Alpha values less than 1 are recommended.
+The UIColor to use for the circle which appears where you tap. NOTE: Setting this defeats the "Smart Color" ability of the tap circle. Alpha values less than `1` are recommended.
 
 `UIColor *backgroundFadeColor` <br />
-The UIColor to fade the background to. NOTE: Setting this defeats the "Smart Color" ability of the background fade. An alpha value of 1 is recommended, as the fade is a constant (`bfPaperCell_fadeConstant`) defined in the BFPaperTableViewCell.m. This bothers me too.
+The UIColor to fade clear backgrounds to. NOTE: Setting this defeats the "Smart Color" ability of the background fade. Alpha values less than `1` are recommended.
 
-`CGFloat backgroundFadeAlpha` <br />
-A CGFloat value between 0 and 1 to which the background will fade into upon selection. Default is `bfPaperCell_fadeConstant` which is defined in BFPaperTableViewCell.m.
+`BOOL rippleFromTapLocation` <br />
+A flag to set to `YES` to have the tap-circle ripple from point of touch. If this is set to `NO`, the tap-circle will always ripple from the center of the view. Default is `YES`.
 
 `BOOL letBackgroundLinger`<br />
 A BOOL flag that determines whether or not to keep the background around after a tap, essentially "highlighting/selecting" the cell. Note that this does not trigger `setSelected:`! It is purely aesthetic. Also this kinda clashes with `cell.selectionStyle`, so by defualt the constructor sets that to `UITableViewCellSelectionStyleNone`. Default is YES.
 
-`CGFloat tapCircleDiameter` <br />
-The CGFloat value representing the Diameter of the tap-circle. By default it will be calculated to almost be big enough to cover up the whole background. Any value less than zero will result in default being used. Three pleasing sizes, `bfPaperTableViewCell_tapCircleDiameterSmall`, `bfPaperTableViewCell_tapCircleDiameterMedium`, and `bfPaperTableViewCell_tapCircleDiameterLarge` are also available for use.
-
-`BOOL rippleFromTapLocation`<br />
-A flag to set to YES to have the tap-circle ripple from point of touch. If this is set to NO, the tap-circle will always ripple from the center of the button. Default is YES.
+`BOOL alwaysCompleteFullAnimation` <br />
+A BOOL flag indicating whether or not to always complete a full animation cycle (bg fade in, tap-circle grow and burst, bg fade out) before starting another one. NO will behave just like the other BFPaper controls, tapping rapidly spawns many circles which all fade out in turn. Default is `YES`.
 
 
 Usage
@@ -85,7 +97,7 @@ Learn more at http://cocoapods.org
 Add this to your podfile to add _BFPaperTableViewCell_ to your project.
 ```ruby
 platform :ios, '7.0'
-pod 'BFPaperTableViewCell', '~> 1.4.13'
+pod 'BFPaperTableViewCell', '~> 2.1.16'
 ```
 
 

@@ -73,4 +73,7 @@ extern const CGFloat bfPaperTableViewCell_tapCircleDiameterDefault;
     Default is YES. */
 @property BOOL letBackgroundLinger;
 
+/** A BOOL flag indicating whether or not to always complete a full animation cycle (bg fade in, tap-circle grow and burst, bg fade out) before starting another one. NO will behave just like the other BFPaper controls, tapping rapidly spawns many circles which all fade out in turn. Default is YES. */
+@property BOOL alwaysCompleteFullAnimation;
+
 @end
