@@ -9,6 +9,8 @@ BFPaperTableViewCell
 
 About
 ---------
+### Now with smoother animations and more public properties for even easier customization!
+
 _BFPaperTableViewCell_ is a subclass of UITableViewCell that behaves much like the new paper table cells from Google's Material Design Labs.
 All animation are asynchronous and are performed on sublayers.
 _BFPaperTableViewCells_ work right away with pleasing default behaviors, however they can be easily customized! The tap-circle color, background fade color, background fade alpha, background highlight (linger or fade away), tap-circle ripple locaiton, and tap-circle diameter are all readily customizable via public properties.
