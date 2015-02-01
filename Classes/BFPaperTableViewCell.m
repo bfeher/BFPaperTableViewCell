@@ -33,7 +33,6 @@
 @interface BFPaperTableViewCell ()
 @property CGRect fadeAndClippingMaskRect;
 @property CGPoint tapPoint;
-//@property UIView *backgroundColorFadeView;
 @property CALayer *backgroundColorFadeLayer;
 @property BOOL beganHighlight;
 @property BOOL beganSelection;
@@ -56,20 +55,6 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterLarge   = bfPaperTableViewCe
 CGFloat const bfPaperTableViewCell_tapCircleDiameterSmall   = bfPaperTableViewCell_tapCircleDiameterMedium / 2.f;
 CGFloat const bfPaperTableViewCell_tapCircleDiameterFull    = -1.f;
 CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
-//// Constants used for tweaking the look/feel of:
-//// -animation durations:
-//static CGFloat const bfPaperCell_animationDurationConstant          = 0.2f;
-//static CGFloat const bfPaperCell_tapCircleGrowthDurationConstant    = bfPaperCell_animationDurationConstant * 2;
-//static CGFloat const bfPaperCell_bgFadeOutAnimationDurationConstant = 0.75f;
-//// -the tap-circle's size:
-//static CGFloat const bfPaperCell_tapCircleDiameterStartValue        = 5.f;  // for the mask
-////static CGFloat const bfPaperCell_tapCircleGrowthBurst               = 40.f;   // No longer using this, but leaving this here for those who want it.
-//// -the tap-circle's beauty:
-//static CGFloat const bfPaperCell_tapFillConstant                    = 0.25f;
-//static CGFloat const bfPaperCell_fadeConstant                       = 0.15f;
-//
-//#define BFPAPERCELL__DUMB_TAP_FILL_COLOR    [UIColor colorWithWhite:0.3 alpha:bfPaperCell_tapFillConstant]
-//#define BFPAPERCELL__DUMB_FADE_COLOR        [UIColor colorWithWhite:0.3 alpha:1]
 
 
 #pragma mark - Default Initializers
