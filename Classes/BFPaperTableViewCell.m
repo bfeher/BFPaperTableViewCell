@@ -35,10 +35,9 @@
 @property CGPoint tapPoint;
 @property CALayer *backgroundColorFadeLayer;
 @property BOOL growthFinished;
+@property BOOL touchCancelledOrEnded;
 @property NSMutableArray *rippleAnimationQueue;
 @property NSMutableArray *deathRowForCircleLayers;  // This is where old circle layers go to be killed :(
-@property BOOL fadedBackgroundOutAlready;
-@property BOOL fadedBackgroundInAlready;
 @property UIColor *dumbTapCircleFillColor;
 @property UIColor *dumbBackgroundFadeColor;
 @property (nonatomic, copy) void (^removeEffectsQueue)();
@@ -93,6 +92,7 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
     self.dumbBackgroundFadeColor     = [UIColor colorWithWhite:0.3 alpha:0.15f];
     self.letBackgroundLinger         = YES;
     self.alwaysCompleteFullAnimation = YES;
+    self.tapDelay                    = 0.1f;
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     
@@ -138,16 +138,15 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
     }
 }
 
-/*
-- (void)prepareForReuse
+/*- (void)prepareForReuse
 {
     [super prepareForReuse];
 
     // Lets go ahead and "reset" our cell:
     // In your subclass, this is where you would call your custom setup.
-    [self setupBFPaperTableViewCell];
-}
-*/
+//    [self setupBFPaperTableViewCell];
+//    [self fadeBGOut];
+}*/
 
 - (void)layoutSubviews
 {
@@ -164,17 +163,28 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
 {
     [super touchesBegan:touches withEvent:event];
     
+    self.touchCancelledOrEnded = NO;
     self.growthFinished = NO;
-    self.fadedBackgroundOutAlready = NO;
     
-    [self fadeBackgroundIn];
-    [self growTapCircle];
+    dispatch_main_after(self.tapDelay, ^{
+        if (!self.touchCancelledOrEnded) {
+            [self fadeBackgroundIn];
+            [self growTapCircle];
+        }
+        else {
+            [self setSelected:NO];
+            [self fadeBGOut];
+        }
+    });
+    
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesEnded:touches withEvent:event];
-    
+
+    self.touchCancelledOrEnded = YES;
+
     [self removeCircle];
     if (!self.letBackgroundLinger) {
         [self removeBackground];
@@ -184,6 +194,8 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesCancelled:touches withEvent:event];
+
+    self.touchCancelledOrEnded = YES;
 
     [self removeCircle];
     [self removeBackground];
@@ -257,12 +269,6 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
 - (void)removeBackground
 {
     if (!self.alwaysCompleteFullAnimation) {
-        if (self.fadedBackgroundOutAlready) {
-            return;
-        }
-        self.fadedBackgroundOutAlready = YES;
-        self.fadedBackgroundInAlready = NO;
-        
         [self fadeBGOut];
     }
     else {
@@ -270,27 +276,14 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
         // Special thanks to github user @ThePantsThief for providing this code!    //
         //////////////////////////////////////////////////////////////////////////////
         if (self.growthFinished) {
-            if (self.fadedBackgroundOutAlready) {
-                return;
-            }
-            self.fadedBackgroundOutAlready = YES;
-            self.fadedBackgroundInAlready = NO;
-            
             [self fadeBGOut];
         } else {
             void (^oldCompletion)() = self.removeEffectsQueue;
-            __weak typeof(self) weakSelf = self;
-            
+//            __weak typeof(self) weakSelf = self;    // Commented this out because we no longer use it. Though this wasn't my code so I'm leaving here in case I broke something by removing it.
             self.removeEffectsQueue = ^void() {
                 if (oldCompletion)
                     oldCompletion();
-                if (weakSelf.fadedBackgroundOutAlready) {
-                    return;
-                }
-                weakSelf.fadedBackgroundOutAlready = YES;
-                weakSelf.fadedBackgroundInAlready = NO;
-                
-                [weakSelf fadeBGOut];
+//                [weakSelf fadeBGOut];   // Commented this out because we no longer use it. Though this wasn't my code so I'm leaving here in case I broke something by removing it.
             };
         }
     }
@@ -298,12 +291,6 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
 
 - (void)fadeBackgroundIn
 {
-    if (self.fadedBackgroundInAlready) {
-        return;
-    }
-    self.fadedBackgroundInAlready = YES;
-    self.fadedBackgroundOutAlready = NO;
-    
     if (!self.backgroundFadeColor) {
         self.backgroundFadeColor = self.usesSmartColor ? [self.textLabel.textColor colorWithAlphaComponent:CGColorGetAlpha(self.dumbBackgroundFadeColor.CGColor)] : self.dumbBackgroundFadeColor;
     }
@@ -511,6 +498,15 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
         finalDiameter = MAX(self.frame.size.width, self.frame.size.height);
     }
     return finalDiameter;
+}
+
+
+#pragma mark - Helpers
+static void dispatch_main_after(NSTimeInterval delay, void (^block)(void))
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        block();
+    });
 }
 #pragma mark -
 

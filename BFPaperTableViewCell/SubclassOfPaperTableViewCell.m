@@ -47,7 +47,7 @@
     self.rippleFromTapLocation = YES;
     self.backgroundFadeColor = [UIColor colorWithWhite:1 alpha:0.2f];
     self.letBackgroundLinger = YES;
-    
+
     // Other setup (eg. text labels, image views, etc.):
 }
 
