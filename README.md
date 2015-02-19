@@ -6,6 +6,10 @@ BFPaperTableViewCell
 
 ![Animated Screenshot](https://raw.githubusercontent.com/bfeher/BFPaperTableViewCell/master/BFPaperTableViewCellDemoGif.gif "Animated Screenshot")
 
+Changes
+--------
+> Please see included [CHANGELOG file](https://github.com/bfeher/BFPaperTableViewCell/blob/master/CHANGELOG.md).
+
 
 About
 ---------
