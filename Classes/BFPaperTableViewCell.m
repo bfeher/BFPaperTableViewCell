@@ -34,10 +34,6 @@
 @property CGRect fadeAndClippingMaskRect;
 @property CGPoint tapPoint;
 @property CALayer *backgroundColorFadeLayer;
-@property BOOL beganHighlight;
-@property BOOL beganSelection;
-@property BOOL haveTapped;
-@property BOOL letGo;
 @property BOOL growthFinished;
 @property NSMutableArray *rippleAnimationQueue;
 @property NSMutableArray *deathRowForCircleLayers;  // This is where old circle layers go to be killed :(
@@ -79,7 +75,6 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
 - (void)setupBFPaperTableViewCell
 {
     // Defaults:
-    self.letGo = YES;
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Defaults for visual properties:                                                                                      //
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -168,8 +163,7 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesBegan:touches withEvent:event];
-
-    self.letGo = NO;
+    
     self.growthFinished = NO;
     self.fadedBackgroundOutAlready = NO;
     
@@ -211,8 +205,6 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
     //NSLog(@"location: x = %0.2f, y = %0.2f", location.x, location.y);
     self.tapPoint = location;
     
-    self.haveTapped = YES;
-    
     return NO;  // Disallow recognition of tap gestures. We just needed this to grab that tasty tap location.
 }
 
@@ -241,7 +233,6 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
 - (void)removeCircle
 {
     if (!self.alwaysCompleteFullAnimation) {
-        self.letGo = YES;
         [self burstTapCircle];
     }
     else {
@@ -249,7 +240,6 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
         // Special thanks to github user @ThePantsThief for providing this code!    //
         //////////////////////////////////////////////////////////////////////////////
         if (self.growthFinished) {
-            self.letGo = YES;
             [self burstTapCircle];
         } else {
             void (^oldCompletion)() = self.removeEffectsQueue;
@@ -258,7 +248,6 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
             self.removeEffectsQueue = ^void() {
                 if (oldCompletion)
                     oldCompletion();
-                weakSelf.letGo = YES;
                 [weakSelf burstTapCircle];
             };
         }
@@ -274,7 +263,7 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
         self.fadedBackgroundOutAlready = YES;
         self.fadedBackgroundInAlready = NO;
         
-        [self fadeBGOutAndBringShadowBackToStart];
+        [self fadeBGOut];
     }
     else {
         //////////////////////////////////////////////////////////////////////////////
@@ -287,7 +276,7 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
             self.fadedBackgroundOutAlready = YES;
             self.fadedBackgroundInAlready = NO;
             
-            [self fadeBGOutAndBringShadowBackToStart];
+            [self fadeBGOut];
         } else {
             void (^oldCompletion)() = self.removeEffectsQueue;
             __weak typeof(self) weakSelf = self;
@@ -301,7 +290,7 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
                 weakSelf.fadedBackgroundOutAlready = YES;
                 weakSelf.fadedBackgroundInAlready = NO;
                 
-                [weakSelf fadeBGOutAndBringShadowBackToStart];
+                [weakSelf fadeBGOut];
             };
         }
     }
@@ -420,7 +409,7 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
     [tapCircle addAnimation:fadeIn forKey:@"opacityAnimation"];
 }
 
-- (void)fadeBGOutAndBringShadowBackToStart
+- (void)fadeBGOut
 {
     //NSLog(@"fading bg");
     
@@ -447,6 +436,18 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
 {
     //NSLog(@"expanding a bit more");
     
+    if (1 > self.rippleAnimationQueue.count) {
+        return; // We don't have any circles to burst, we can just leave and ponder how and why we got here in this state.
+    }
+    
+    // Get the next tap circle to expand:
+    CAShapeLayer *tapCircle = [self.rippleAnimationQueue firstObject];
+    if (self.rippleAnimationQueue.count > 0) {
+        [self.rippleAnimationQueue removeObjectAtIndex:0];
+    }
+    [self.deathRowForCircleLayers addObject:tapCircle];
+
+    
     // Calculate the tap circle's ending diameter:
     CGFloat tapCircleFinalDiameter = [self calculateTapCircleFinalDiameter];
     tapCircleFinalDiameter += self.tapCircleBurstAmount;
@@ -456,13 +457,6 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
     
     // Create ending circle path for mask:
     UIBezierPath *endingCirclePath = [UIBezierPath bezierPathWithRoundedRect:endingRectSizerView.frame cornerRadius:tapCircleFinalDiameter / 2.f];
-    
-    // Get the next tap circle to expand:
-    CAShapeLayer *tapCircle = [self.rippleAnimationQueue firstObject];
-    if (self.rippleAnimationQueue.count > 0) {
-        [self.rippleAnimationQueue removeObjectAtIndex:0];
-    }
-    [self.deathRowForCircleLayers addObject:tapCircle];
     
     
     CGPathRef startingPath = tapCircle.path;
