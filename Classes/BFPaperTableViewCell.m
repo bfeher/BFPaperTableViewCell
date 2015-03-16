@@ -166,17 +166,26 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
     self.touchCancelledOrEnded = NO;
     self.growthFinished = NO;
     
-    dispatch_main_after(self.tapDelay, ^{
+    if (self.tapDelay > 0) {
+      // Dispatch on main thread to delay animations
+      dispatch_main_after(self.tapDelay, ^{
         if (!self.touchCancelledOrEnded) {
-            [self fadeBackgroundIn];
-            [self growTapCircle];
+          [self fadeBackgroundIn];
+          [self growTapCircle];
         }
         else {
-            [self setSelected:NO];
-            [self fadeBGOut];
+          [self setSelected:NO];
+          [self fadeBGOut];
         }
-    });
-    
+      });
+      
+    }
+    else {
+      // Avoid dispatching if there's no delay
+      [self fadeBackgroundIn];
+      [self growTapCircle];
+    }
+  
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -279,11 +288,11 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
             [self fadeBGOut];
         } else {
             void (^oldCompletion)() = self.removeEffectsQueue;
-//            __weak typeof(self) weakSelf = self;    // Commented this out because we no longer use it. Though this wasn't my code so I'm leaving here in case I broke something by removing it.
+            __weak typeof(self) weakSelf = self;
             self.removeEffectsQueue = ^void() {
                 if (oldCompletion)
                     oldCompletion();
-//                [weakSelf fadeBGOut];   // Commented this out because we no longer use it. Though this wasn't my code so I'm leaving here in case I broke something by removing it.
+                [weakSelf fadeBGOut];
             };
         }
     }
