@@ -5,6 +5,12 @@ BFPaperTableViewCell
 > Note that this changelog was started very late, at roughly the time between version 2.1.17 and 2.2.1. Previous changes are lost to the All Father, forever to be unknown.
 
 
+
+2.2.2
+---------
++ Merged a branch from github user @eithanshavit, bringing back support for a tapDelay of 0.
+
+
 2.2.1
 ---------
 + Added a changelog!
