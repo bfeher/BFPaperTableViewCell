@@ -178,14 +178,12 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
           [self fadeBGOut];
         }
       });
-      
     }
     else {
       // Avoid dispatching if there's no delay
       [self fadeBackgroundIn];
       [self growTapCircle];
     }
-  
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
