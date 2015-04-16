@@ -93,6 +93,7 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
     self.letBackgroundLinger         = YES;
     self.alwaysCompleteFullAnimation = YES;
     self.tapDelay                    = 0.1f;
+    self.maskPath                    = nil;
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     
@@ -365,7 +366,7 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
     
     // Create a mask if we are not going to ripple over bounds:
     CAShapeLayer *mask = [CAShapeLayer layer];
-    mask.path = [UIBezierPath bezierPathWithRoundedRect:self.fadeAndClippingMaskRect cornerRadius:self.layer.cornerRadius].CGPath;
+    mask.path = (nil == self.maskPath) ? [UIBezierPath bezierPathWithRoundedRect:self.fadeAndClippingMaskRect cornerRadius:self.layer.cornerRadius].CGPath : self.maskPath.CGPath;
     mask.fillColor = [UIColor blackColor].CGColor;
     mask.strokeColor = [UIColor clearColor].CGColor;
     mask.borderColor = [UIColor clearColor].CGColor;

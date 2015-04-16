@@ -47,7 +47,9 @@
     self.rippleFromTapLocation = YES;
     self.backgroundFadeColor = [UIColor colorWithWhite:1 alpha:0.2f];
     self.letBackgroundLinger = YES;
-
+    
+//    CGRect maskRect = CGRectMake(0, 0, 100, 100);
+//    self.maskPath = [UIBezierPath bezierPathWithRoundedRect:maskRect cornerRadius:25.f];    // Just to show this property exists.
     // Other setup (eg. text labels, image views, etc.):
 }
 

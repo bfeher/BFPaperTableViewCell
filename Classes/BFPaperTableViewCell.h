@@ -78,4 +78,7 @@ extern const CGFloat bfPaperTableViewCell_tapCircleDiameterDefault;
 
 /** A CGFLoat to set the amount of time in seconds to delay the tap event / trigger to spawn circles. For example, if the tapDelay is set to 1.f, you need to press and hold the cell for 1.f seconds to trigger spawning a circle. Default is 0.1f. */
 @property CGFloat tapDelay;
+
+/** A UIBezierPath you can set to override the mask path of the ripples. Set this if you have a custom path for your cell. If this is nil, BFPaperTableViewCell will try its best to provide a correct mask. Default is nil. */
+@property UIBezierPath *maskPath;
 @end
