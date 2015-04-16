@@ -303,6 +303,16 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
         self.backgroundFadeColor = self.usesSmartColor ? [self.textLabel.textColor colorWithAlphaComponent:CGColorGetAlpha(self.dumbBackgroundFadeColor.CGColor)] : self.dumbBackgroundFadeColor;
     }
     
+    if (nil != self.maskPath) {
+        CAShapeLayer *mask = [CAShapeLayer layer];
+        mask.path = self.maskPath.CGPath;
+        mask.fillColor = [UIColor blackColor].CGColor;
+        mask.strokeColor = [UIColor clearColor].CGColor;
+        mask.borderColor = [UIColor clearColor].CGColor;
+        mask.borderWidth = 0;
+        self.backgroundColorFadeLayer.mask = mask;
+    }
+    
     // Setup background fade layer:
     self.backgroundColorFadeLayer.backgroundColor = self.backgroundFadeColor.CGColor;
     
