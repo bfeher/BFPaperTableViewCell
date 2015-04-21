@@ -6,6 +6,11 @@ BFPaperTableViewCell
 
 
 
+2.3.3
+---------
++ ^ Updated pods.
+
+
 2.3.2
 ---------
 + ^ Fixed bug where .maskPath was not being applied to the .backgroundFadeLayer.

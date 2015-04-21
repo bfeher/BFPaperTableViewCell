@@ -109,7 +109,7 @@ Learn more at http://cocoapods.org
 Add this to your podfile to add _BFPaperTableViewCell_ to your project.
 ```ruby
 platform :ios, '7.0'
-pod 'BFPaperTableViewCell', '~> 2.3.2'
+pod 'BFPaperTableViewCell', '~> 2.3.3'
 ```
 
 
