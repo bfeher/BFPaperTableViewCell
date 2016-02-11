@@ -100,7 +100,7 @@ If you use storyboards with prototype cells, be sure to change the prototype cel
 ```
 
 
-Cocoapods
+CocoaPods
 -------
 
 CocoaPods are the best way to manage library dependencies in Objective-C projects.
