@@ -6,6 +6,11 @@ BFPaperTableViewCell
 
 
 
+2.3.3.1
+---------
+^ Migrated to CocoaPods 1.0.
+
+
 2.3.3
 ---------
 + ^ Updated pods.
