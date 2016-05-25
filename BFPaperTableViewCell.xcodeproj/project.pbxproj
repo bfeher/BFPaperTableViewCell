@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C252AB3C7E6944848065E9E3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB931C51F2904B9DB9C8D5D4 /* libPods.a */; };
+		8428B227A4E7245CBB9FE93A /* libPods-BFPaperTableViewCell.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA7871AF1595D7A7FA9BEA34 /* libPods-BFPaperTableViewCell.a */; };
 		F42B5BA91978DD0000D6F4B5 /* BFPaperTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F42B5BA81978DD0000D6F4B5 /* BFPaperTableViewCell.m */; };
 		F4533CD81A157DA500DF9E50 /* SubclassOfPaperTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4533CD71A157DA500DF9E50 /* SubclassOfPaperTableViewCell.m */; };
 		F48E73AE1977B45700982A46 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48E73AD1977B45700982A46 /* Foundation.framework */; };
@@ -37,9 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		22A0C51F80BC08B279E64E78 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		50256C2DBF46E09557E5A3C4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		AB931C51F2904B9DB9C8D5D4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		34A64C0051D85F13E79A5509 /* Pods-BFPaperTableViewCell.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BFPaperTableViewCell.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BFPaperTableViewCell/Pods-BFPaperTableViewCell.debug.xcconfig"; sourceTree = "<group>"; };
+		BA7871AF1595D7A7FA9BEA34 /* libPods-BFPaperTableViewCell.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BFPaperTableViewCell.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C293CEC56F23E09251DD8E02 /* Pods-BFPaperTableViewCell.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BFPaperTableViewCell.release.xcconfig"; path = "Pods/Target Support Files/Pods-BFPaperTableViewCell/Pods-BFPaperTableViewCell.release.xcconfig"; sourceTree = "<group>"; };
 		F42B5BA71978DD0000D6F4B5 /* BFPaperTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BFPaperTableViewCell.h; path = ../Classes/BFPaperTableViewCell.h; sourceTree = "<group>"; };
 		F42B5BA81978DD0000D6F4B5 /* BFPaperTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BFPaperTableViewCell.m; path = ../Classes/BFPaperTableViewCell.m; sourceTree = "<group>"; };
 		F4533CD61A157DA500DF9E50 /* SubclassOfPaperTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubclassOfPaperTableViewCell.h; sourceTree = "<group>"; };
@@ -73,7 +73,7 @@
 				F48E73B01977B45700982A46 /* CoreGraphics.framework in Frameworks */,
 				F48E73B21977B45700982A46 /* UIKit.framework in Frameworks */,
 				F48E73AE1977B45700982A46 /* Foundation.framework in Frameworks */,
-				C252AB3C7E6944848065E9E3 /* libPods.a in Frameworks */,
+				8428B227A4E7245CBB9FE93A /* libPods-BFPaperTableViewCell.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,11 +90,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D37601D0F6742D463340DF2D /* Pods */ = {
+		950F859A35D91BAA0EFB85B5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				22A0C51F80BC08B279E64E78 /* Pods.debug.xcconfig */,
-				50256C2DBF46E09557E5A3C4 /* Pods.release.xcconfig */,
+				34A64C0051D85F13E79A5509 /* Pods-BFPaperTableViewCell.debug.xcconfig */,
+				C293CEC56F23E09251DD8E02 /* Pods-BFPaperTableViewCell.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -107,7 +107,7 @@
 				F48E73D21977B45700982A46 /* BFPaperTableViewCellTests */,
 				F48E73AC1977B45700982A46 /* Frameworks */,
 				F48E73AB1977B45700982A46 /* Products */,
-				D37601D0F6742D463340DF2D /* Pods */,
+				950F859A35D91BAA0EFB85B5 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,7 +127,7 @@
 				F48E73AF1977B45700982A46 /* CoreGraphics.framework */,
 				F48E73B11977B45700982A46 /* UIKit.framework */,
 				F48E73CC1977B45700982A46 /* XCTest.framework */,
-				AB931C51F2904B9DB9C8D5D4 /* libPods.a */,
+				BA7871AF1595D7A7FA9BEA34 /* libPods-BFPaperTableViewCell.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -194,12 +194,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F48E73DC1977B45700982A46 /* Build configuration list for PBXNativeTarget "BFPaperTableViewCell" */;
 			buildPhases = (
-				D3F7EFDC51654A9C9EAC3917 /* Check Pods Manifest.lock */,
+				D7B9B4D3EDA53BA43DB5A398 /* 📦 Check Pods Manifest.lock */,
 				F48E73A61977B45700982A46 /* Sources */,
 				F48E73A71977B45700982A46 /* Frameworks */,
 				F40049CF1A68FF6E0042C309 /* ShellScript */,
 				F48E73A81977B45700982A46 /* Resources */,
-				2EB96EBAFF054B3D87DCD202 /* Copy Pods Resources */,
+				FD9B39F009F81CB28691C2ED /* 📦 Embed Pods Frameworks */,
+				2D890BE6072815AA7C494252 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -284,29 +285,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2EB96EBAFF054B3D87DCD202 /* Copy Pods Resources */ = {
+		2D890BE6072815AA7C494252 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BFPaperTableViewCell/Pods-BFPaperTableViewCell-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D3F7EFDC51654A9C9EAC3917 /* Check Pods Manifest.lock */ = {
+		D7B9B4D3EDA53BA43DB5A398 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -326,6 +327,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = "echo \"Running Build Number bash script.\"\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\nupdatedBuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\necho \"Updated Build Number $updatedBuildNumber\"";
+		};
+		FD9B39F009F81CB28691C2ED /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BFPaperTableViewCell/Pods-BFPaperTableViewCell-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -460,7 +476,7 @@
 		};
 		F48E73DD1977B45700982A46 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 22A0C51F80BC08B279E64E78 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 34A64C0051D85F13E79A5509 /* Pods-BFPaperTableViewCell.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -475,7 +491,7 @@
 		};
 		F48E73DE1977B45700982A46 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 50256C2DBF46E09557E5A3C4 /* Pods.release.xcconfig */;
+			baseConfigurationReference = C293CEC56F23E09251DD8E02 /* Pods-BFPaperTableViewCell.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
