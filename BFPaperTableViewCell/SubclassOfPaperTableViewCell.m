@@ -42,7 +42,7 @@
 {
     // Even though defaults values are cool, I'm setting all of the customizable options here as an example:
     self.usesSmartColor = NO;
-    self.tapCircleColor = [[UIColor colorWithRed:198.f/255.f green:255.f/255.f blue:0/255.f alpha:1] colorWithAlphaComponent:0.6f];
+    self.tapCircleColor = [UIColor colorWithRed:198.f/255.f green:255.f/255.f blue:0/255.f alpha:0.6];
     self.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterSmall;
     self.rippleFromTapLocation = YES;
     self.backgroundFadeColor = [UIColor colorWithWhite:1 alpha:0.2f];
