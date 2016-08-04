@@ -210,7 +210,7 @@
         cell.backgroundColor = [UIColor colorWithRed:103.f/255.f green:58.f/255.f blue:183.f/255.f alpha:1];
         cell.textLabel.textColor = [UIColor colorWithRed:3.f/255.f green:169.f/255.f blue:244.f/255.f alpha:1];
         cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterSmall;
-        cell.tapCircleColor = [[UIColor colorWithRed:198.f/255.f green:255.f/255.f blue:0.f/255.f alpha:1] colorWithAlphaComponent:0.7];
+        cell.tapCircleColor = [UIColor colorWithRed:198.f/255.f green:255.f/255.f blue:0.f/255.f alpha:0.7f];
         cell.backgroundFadeColor = [UIColor whiteColor];
         cell.letBackgroundLinger = NO;
     }
