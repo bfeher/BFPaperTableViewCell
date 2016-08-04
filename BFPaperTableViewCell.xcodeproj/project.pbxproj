@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8428B227A4E7245CBB9FE93A /* libPods-BFPaperTableViewCell.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA7871AF1595D7A7FA9BEA34 /* libPods-BFPaperTableViewCell.a */; };
+		505849211D530E8100FEE8FE /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 505849201D530E8100FEE8FE /* Launch Screen.storyboard */; };
 		F42B5BA91978DD0000D6F4B5 /* BFPaperTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F42B5BA81978DD0000D6F4B5 /* BFPaperTableViewCell.m */; };
 		F4533CD81A157DA500DF9E50 /* SubclassOfPaperTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4533CD71A157DA500DF9E50 /* SubclassOfPaperTableViewCell.m */; };
 		F48E73AE1977B45700982A46 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48E73AD1977B45700982A46 /* Foundation.framework */; };
@@ -37,9 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		34A64C0051D85F13E79A5509 /* Pods-BFPaperTableViewCell.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BFPaperTableViewCell.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BFPaperTableViewCell/Pods-BFPaperTableViewCell.debug.xcconfig"; sourceTree = "<group>"; };
-		BA7871AF1595D7A7FA9BEA34 /* libPods-BFPaperTableViewCell.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BFPaperTableViewCell.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C293CEC56F23E09251DD8E02 /* Pods-BFPaperTableViewCell.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BFPaperTableViewCell.release.xcconfig"; path = "Pods/Target Support Files/Pods-BFPaperTableViewCell/Pods-BFPaperTableViewCell.release.xcconfig"; sourceTree = "<group>"; };
+		505849201D530E8100FEE8FE /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		F42B5BA71978DD0000D6F4B5 /* BFPaperTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BFPaperTableViewCell.h; path = ../Classes/BFPaperTableViewCell.h; sourceTree = "<group>"; };
 		F42B5BA81978DD0000D6F4B5 /* BFPaperTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BFPaperTableViewCell.m; path = ../Classes/BFPaperTableViewCell.m; sourceTree = "<group>"; };
 		F4533CD61A157DA500DF9E50 /* SubclassOfPaperTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubclassOfPaperTableViewCell.h; sourceTree = "<group>"; };
@@ -73,7 +71,6 @@
 				F48E73B01977B45700982A46 /* CoreGraphics.framework in Frameworks */,
 				F48E73B21977B45700982A46 /* UIKit.framework in Frameworks */,
 				F48E73AE1977B45700982A46 /* Foundation.framework in Frameworks */,
-				8428B227A4E7245CBB9FE93A /* libPods-BFPaperTableViewCell.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,15 +87,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		950F859A35D91BAA0EFB85B5 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				34A64C0051D85F13E79A5509 /* Pods-BFPaperTableViewCell.debug.xcconfig */,
-				C293CEC56F23E09251DD8E02 /* Pods-BFPaperTableViewCell.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		F48E73A11977B45700982A46 = {
 			isa = PBXGroup;
 			children = (
@@ -107,7 +95,6 @@
 				F48E73D21977B45700982A46 /* BFPaperTableViewCellTests */,
 				F48E73AC1977B45700982A46 /* Frameworks */,
 				F48E73AB1977B45700982A46 /* Products */,
-				950F859A35D91BAA0EFB85B5 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,7 +114,6 @@
 				F48E73AF1977B45700982A46 /* CoreGraphics.framework */,
 				F48E73B11977B45700982A46 /* UIKit.framework */,
 				F48E73CC1977B45700982A46 /* XCTest.framework */,
-				BA7871AF1595D7A7FA9BEA34 /* libPods-BFPaperTableViewCell.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -155,6 +141,7 @@
 				F48E73B61977B45700982A46 /* InfoPlist.strings */,
 				F48E73B91977B45700982A46 /* main.m */,
 				F48E73BB1977B45700982A46 /* BFPaperTableViewCell-Prefix.pch */,
+				505849201D530E8100FEE8FE /* Launch Screen.storyboard */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -194,13 +181,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F48E73DC1977B45700982A46 /* Build configuration list for PBXNativeTarget "BFPaperTableViewCell" */;
 			buildPhases = (
-				D7B9B4D3EDA53BA43DB5A398 /* 📦 Check Pods Manifest.lock */,
 				F48E73A61977B45700982A46 /* Sources */,
 				F48E73A71977B45700982A46 /* Frameworks */,
 				F40049CF1A68FF6E0042C309 /* ShellScript */,
 				F48E73A81977B45700982A46 /* Resources */,
-				FD9B39F009F81CB28691C2ED /* 📦 Embed Pods Frameworks */,
-				2D890BE6072815AA7C494252 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -236,7 +220,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = BFPaper;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Bence Feher";
 				TargetAttributes = {
 					F48E73CA1977B45700982A46 = {
@@ -270,6 +254,7 @@
 			files = (
 				F48E73C61977B45700982A46 /* Images.xcassets in Resources */,
 				F48E73B81977B45700982A46 /* InfoPlist.strings in Resources */,
+				505849211D530E8100FEE8FE /* Launch Screen.storyboard in Resources */,
 				F48E73C11977B45700982A46 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,36 +270,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2D890BE6072815AA7C494252 /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BFPaperTableViewCell/Pods-BFPaperTableViewCell-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D7B9B4D3EDA53BA43DB5A398 /* 📦 Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 		F40049CF1A68FF6E0042C309 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -327,21 +282,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = "echo \"Running Build Number bash script.\"\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\nupdatedBuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\necho \"Updated Build Number $updatedBuildNumber\"";
-		};
-		FD9B39F009F81CB28691C2ED /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BFPaperTableViewCell/Pods-BFPaperTableViewCell-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -422,6 +362,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -476,14 +417,13 @@
 		};
 		F48E73DD1977B45700982A46 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 34A64C0051D85F13E79A5509 /* Pods-BFPaperTableViewCell.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BFPaperTableViewCell/BFPaperTableViewCell-Prefix.pch";
 				INFOPLIST_FILE = "BFPaperTableViewCell/BFPaperTableViewCell-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bencefeher.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -491,14 +431,13 @@
 		};
 		F48E73DE1977B45700982A46 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C293CEC56F23E09251DD8E02 /* Pods-BFPaperTableViewCell.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BFPaperTableViewCell/BFPaperTableViewCell-Prefix.pch";
 				INFOPLIST_FILE = "BFPaperTableViewCell/BFPaperTableViewCell-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bencefeher.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -520,6 +459,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "BFPaperTableViewCellTests/BFPaperTableViewCellTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bencefeher.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -538,6 +478,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BFPaperTableViewCell/BFPaperTableViewCell-Prefix.pch";
 				INFOPLIST_FILE = "BFPaperTableViewCellTests/BFPaperTableViewCellTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bencefeher.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;

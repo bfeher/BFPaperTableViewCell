@@ -6,6 +6,13 @@ BFPaperTableViewCell
 
 
 
+2.3.8
+---------
+* (-) Removed all BFPaperColor dependency and code.  
+* (^) Properties now appear in Interface Builder (IBInspectable)!  
+* (+) Added launch screen to example project.  
+
+
 2.3.4
 ---------
 ^ Migrated to CocoaPods 1.0.

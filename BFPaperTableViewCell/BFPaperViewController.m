@@ -31,9 +31,6 @@
 #import "BFPaperViewController.h"
 // Classes:
 #import "SubclassOfPaperTableViewCell.h"
-// Pods:
-#import "UIColor+BFPaperColors.h"
-
 
 
 @interface BFPaperViewController ()
@@ -61,12 +58,33 @@
     [self.tableView registerClass:[SubclassOfPaperTableViewCell class] forCellReuseIdentifier:@"BFPaperCell"];  // NOTE: This is not required if we declared a prototype cell in our storyboard (which this example project does). This is here purely for information purposes.
     
     // Fill up an array with all the basic BFPaperColors:
-    self.colors = @[[UIColor paperColorRed], [UIColor paperColorPink], [UIColor paperColorPurple], [UIColor paperColorDeepPurple], [UIColor paperColorIndigo], [UIColor paperColorBlue], [UIColor paperColorLightBlue], [UIColor paperColorCyan], [UIColor paperColorTeal], [UIColor paperColorGreen], [UIColor paperColorLightGreen], [UIColor paperColorLime], [UIColor paperColorYellow], [UIColor paperColorAmber], [UIColor  paperColorDeepOrange], [UIColor paperColorBrown], [UIColor paperColorGray], [UIColor paperColorBlueGray], [UIColor paperColorGray700], [UIColor paperColorGray700]];
+    self.colors = @[[UIColor colorWithRed:244.f/255.f green:67.f/255.f blue:54.f/255.f alpha:1],
+                    [UIColor colorWithRed:233.f/255.f green:30.f/255.f blue:99.f/255.f alpha:1],
+                    [UIColor colorWithRed:156.f/255.f green:39.f/255.f blue:176.f/255.f alpha:1],
+                    [UIColor colorWithRed:103.f/255.f green:58.f/255.f blue:183.f/255.f alpha:1],
+                    [UIColor colorWithRed:63.f/255.f green:81.f/255.f blue:181.f/255.f alpha:1],
+                    [UIColor colorWithRed:33.f/255.f green:150.f/255.f blue:243.f/255.f alpha:1],
+                    [UIColor colorWithRed:3.f/255.f green:169.f/255.f blue:244.f/255.f alpha:1],
+                    [UIColor colorWithRed:0.f/255.f green:188.f/255.f blue:212.f/255.f alpha:1],
+                    [UIColor colorWithRed:0.f/255.f green:150.f/255.f blue:136.f/255.f alpha:1],
+                    [UIColor colorWithRed:76.f/255.f green:175.f/255.f blue:80.f/255.f alpha:1],
+                    [UIColor colorWithRed:139.f/255.f green:195.f/255.f blue:74.f/255.f alpha:1],
+                    [UIColor colorWithRed:205.f/255.f green:220.f/255.f blue:57.f/255.f alpha:1],
+                    [UIColor colorWithRed:255.f/255.f green:235.f/255.f blue:59.f/255.f alpha:1],
+                    [UIColor colorWithRed:255.f/255.f green:193.f/255.f blue:7.f/255.f alpha:1],
+                    [UIColor colorWithRed:255.f/255.f green:152.f/255.f blue:0.f/255.f alpha:1],
+                    [UIColor colorWithRed:255.f/255.f green:87.f/255.f blue:34.f/255.f alpha:1],
+                    [UIColor colorWithRed:121.f/255.f green:85.f/255.f blue:72.f/255.f alpha:1],
+                    [UIColor colorWithRed:158.f/255.f green:158.f/255.f blue:158.f/255.f alpha:1],
+                    [UIColor colorWithRed:96.f/255.f green:125.f/255.f blue:139.f/255.f alpha:1],
+                    [UIColor colorWithRed:97.f/255.f green:97.f/255.f blue:97.f/255.f alpha:1],
+                    [UIColor colorWithRed:97.f/255.f green:97.f/255.f blue:97.f/255.f alpha:1]];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
     self.tableView.backgroundColor = [UIColor colorWithRed:0.7 green:0.98 blue:0.7 alpha:1];
+    self.tableView.delaysContentTouches = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -160,14 +178,14 @@
     // Demo 2 clear cells:
     if (indexPath.row == 0) {
         cell.backgroundColor = [UIColor clearColor];
-        cell.textLabel.textColor = [UIColor paperColorLimeA400];
+        cell.textLabel.textColor = [UIColor colorWithRed:198.f/255.f green:255.f/255.f blue:0.f/255.f alpha:1];
         cell.usesSmartColor = YES;
         cell.textLabel.text = @"Clear, Smart Color";
         cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterFull;
     }
     else if (indexPath.row == 1) {
         cell.backgroundColor = [UIColor clearColor];
-        cell.textLabel.textColor = [UIColor paperColorLimeA400];
+        cell.textLabel.textColor = [UIColor colorWithRed:198.f/255.f green:255.f/255.f blue:0.f/255.f alpha:1];
         cell.usesSmartColor = NO;
         cell.textLabel.text = @"Clear, !Smart Color";
         cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterFull;
@@ -189,10 +207,10 @@
     // Customize last two cells:
     else {//if (indexPath.row > (self.colors.count * 2) - 3) {
         cell.textLabel.text = @"Customized!";
-        cell.backgroundColor = [UIColor paperColorDeepPurple];
-        cell.textLabel.textColor = [UIColor paperColorLightBlue];
+        cell.backgroundColor = [UIColor colorWithRed:103.f/255.f green:58.f/255.f blue:183.f/255.f alpha:1];
+        cell.textLabel.textColor = [UIColor colorWithRed:3.f/255.f green:169.f/255.f blue:244.f/255.f alpha:1];
         cell.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterSmall;
-        cell.tapCircleColor = [[UIColor paperColorLimeA400] colorWithAlphaComponent:0.7];
+        cell.tapCircleColor = [[UIColor colorWithRed:198.f/255.f green:255.f/255.f blue:0.f/255.f alpha:1] colorWithAlphaComponent:0.7];
         cell.backgroundFadeColor = [UIColor whiteColor];
         cell.letBackgroundLinger = NO;
     }
