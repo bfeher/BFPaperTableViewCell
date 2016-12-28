@@ -65,6 +65,7 @@ CGFloat const bfPaperTableViewCell_tapCircleDiameterDefault = -2.f;
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
     // Initialization code
     [self setupBFPaperTableViewCell];
 }
