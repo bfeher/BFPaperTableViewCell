@@ -6,6 +6,11 @@ BFPaperTableViewCell
 
 
 
+2.3.9
+---------
+* (^) Fixed a small bug where [super awakeFromNib] wasn't being called in BFPaperTableViewCell.m's 'awakeFromNib'.  
+
+
 2.3.8
 ---------
 * (-) Removed all BFPaperColor dependency and code.  
