@@ -38,7 +38,13 @@ extern const CGFloat bfPaperTableViewCell_tapCircleDiameterFull;
 extern const CGFloat bfPaperTableViewCell_tapCircleDiameterDefault;
 
 IB_DESIGNABLE
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 100000
+// CAAnimationDelegate is not available before iOS 10 SDK
 @interface BFPaperTableViewCell : UITableViewCell
+#else
+@interface BFPaperTableViewCell : UITableViewCell <CAAnimationDelegate>
+#endif
+
 
 #pragma mark - Properties
 #pragma mark Animation
