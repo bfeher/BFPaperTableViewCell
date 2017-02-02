@@ -68,7 +68,7 @@ Usage
 ---------
 Add the _BFPaperTableViewCell_ header and implementation file to your project. (.h & .m)
 
-After that, you can use it just like any other `UITableViewCell`. 
+After that, you can use it just like any other `UITableViewCell`.
 
 If you use storyboards with prototype cells, be sure to change the prototype cell's class to _BFPaperTableViewCell_!
 
@@ -108,7 +108,7 @@ Learn more at http://cocoapods.org
 
 Add this to your podfile to add _BFPaperTableViewCell_ to your project.
 ```ruby
-platform :ios, '7.0'
+platform :ios, '8.0'
 pod 'BFPaperTableViewCell'
 ```
 
