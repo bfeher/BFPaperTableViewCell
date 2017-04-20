@@ -72,7 +72,7 @@ After that, you can use it just like any other `UITableViewCell`.
 
 If you use storyboards with prototype cells, be sure to change the prototype cell's class to _BFPaperTableViewCell_!
 
-###Example
+### Example
 ```objective-c
 // Register BFPaperTableViewCell for our tableView in viewDidLoad:
 - (void)viewDidLoad
